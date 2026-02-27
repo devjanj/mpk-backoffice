@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { FinanceRow } from '@/lib/google-sheets'
 import { FolderKanban, Search, Link as LinkIcon, Split } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSearchParams } from 'next/navigation'
 import { parseEuropeanNumber } from '@/components/CFCacheManager'
 import { TransactionSplitModal } from '@/components/TransactionSplitModal'
 
@@ -22,6 +23,7 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
     const [splits, setSplits] = useState<any[]>([])
     const [projectStatuses, setProjectStatuses] = useState<Record<string, string>>({})
     const [isUpdatingStatus, setIsUpdatingStatus] = useState(false)
+    const searchParams = useSearchParams()
 
     // Modal State
     const [selectedTx, setSelectedTx] = useState<FinanceRow | null>(null)
@@ -104,7 +106,12 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
         // Fetch Splits and Statuses
         fetchSplits()
         fetchStatuses()
-    }, [initialData])
+
+        const requestedProject = searchParams.get('id')
+        if (requestedProject) {
+            setSelectedProject(requestedProject)
+        }
+    }, [initialData, searchParams])
 
     // Extract unique project numbers (filtering out total blanks)
     const uniqueProjects = useMemo(() => {
@@ -232,8 +239,8 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                             onClick={() => toggleProjectStatus('ACTIVE')}
                             disabled={isUpdatingStatus}
                             className={`px-4 py-2 rounded-lg text-sm font-semibold z-10 transition-all ${(projectStatuses[selectedProject] || 'ACTIVE') === 'ACTIVE'
-                                    ? 'bg-background shadow-sm text-foreground'
-                                    : 'text-muted-foreground hover:text-foreground'
+                                ? 'bg-background shadow-sm text-foreground'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             Active
@@ -242,8 +249,8 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                             onClick={() => toggleProjectStatus('FINISHED')}
                             disabled={isUpdatingStatus}
                             className={`px-4 py-2 rounded-lg text-sm font-semibold z-10 transition-all ${projectStatuses[selectedProject] === 'FINISHED'
-                                    ? 'bg-background shadow-sm text-foreground'
-                                    : 'text-muted-foreground hover:text-foreground'
+                                ? 'bg-background shadow-sm text-foreground'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             Finished

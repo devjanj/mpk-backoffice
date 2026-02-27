@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Sidebar } from '@/components/Sidebar'
 import { syncFinanceSheet } from '@/lib/google-sheets'
 import { ProjectsDashboard } from '@/components/ProjectsDashboard'
@@ -28,7 +29,9 @@ export default async function ProjectsPage() {
                     </div>
                 </header>
 
-                <ProjectsDashboard initialData={data} />
+                <Suspense fallback={<div className="animate-pulse bg-muted/20 h-64 rounded-3xl w-full"></div>}>
+                    <ProjectsDashboard initialData={data} />
+                </Suspense>
             </main>
         </div>
     )
