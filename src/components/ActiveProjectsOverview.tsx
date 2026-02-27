@@ -164,7 +164,7 @@ export function ActiveProjectsOverview({ initialData }: { initialData: FinanceRo
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <Link href={`/projects`} className="text-primary hover:text-primary/80 font-semibold text-xs bg-primary/10 px-3 py-2 rounded-lg transition-colors">
+                                        <Link href={`/projects?id=${encodeURIComponent(p.projectNumber)}`} className="text-primary hover:text-primary/80 font-semibold text-xs bg-primary/10 px-3 py-2 rounded-lg transition-colors">
                                             View Details
                                         </Link>
                                     </td>
