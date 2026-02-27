@@ -1,0 +1,4842 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.052.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:camt.052.001.02 ./camt.052.001.02.xsd">
+
+  <BkToCstmrAcctRpt>
+    <GrpHdr>
+      <MsgId>2026-02-27T08:32:34/18092</MsgId>
+      <CreDtTm>2026-02-27T08:32:34</CreDtTm>
+    </GrpHdr>
+    <Rpt>
+      <Id>2026-02-27T08:32:34</Id>
+      <CreDtTm>2026-02-27T08:32:34</CreDtTm>
+      <Acct>
+        <Id>
+          <IBAN>SI56028430266336863</IBAN>
+        </Id>
+        <Ownr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Ownr>
+      </Acct> 
+<Ntry>
+
+  <Amt Ccy="EUR">30.00</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-05</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-14</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9BHQC4M2</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>CR211902046629403100001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>WP SHAPE HOUSE LivorLivornoITA4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-14</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">11.50</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT99D4HM1L</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211779937135300030001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56029000000200020</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>IZPIS PROMETA NA RAČUNU</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">103.78</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-29</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9ACN8MSC</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211833466829480020001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BS MOL Ravbar ZahodPOSTOJNASVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">49.97</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-29</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9ACN8MT6</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211833466829480080001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>MFM INTARZIJA d.o.o.PrestranekSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">79.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-30</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-27</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9AHSC6R2</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211849978129026110001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>MAGRAL  D.O.O. IlirsIlirska BistrSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-27</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">121.29</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-31</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-29</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9AP715X6</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211855733329118180001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>VOGART BREZOVICA PRIBREZOVICA PRISVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-29</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">353.00</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-29</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-29</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9ACN8MTC</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI3191795303-194080371965</EndToEndId>
+        <TxId>CR211837923936853010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>PDP - PRORACUN DRZAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORCICEVA ULICA020  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2XXXX</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2XXXX</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>TAXR</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0091795303-4080371965</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>VRACILO DAVKA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-29</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">578.92</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-31</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-29</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9AP715X2</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211855733329118120001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>LES3 D.O.O. PrestranPrestranekSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-29</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">7.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-31</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-31</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9AP715XA</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211861452001872010001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NLB D.D.</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>029000000200020</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <Purp>
+        <Cd>FCOL</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>POSL.PAKET NAPREDNI 2 NOVOUST.</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-31</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">310.20</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2025-12-31</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2025-12-31</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9AP715VG</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI99</EndToEndId>
+        <TxId>CR211858065515436000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>ZASEBNI ZDRAVSTVENI ZAVOD BOSSMAN</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>VOJKOVO NABREZJE 32  KOPER CAPODISTRIA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56101000035353973</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>OTHR</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI002025-11-013</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>DRUGO</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2025-12-31</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">89.34</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-07</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-05</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9BTY4GV0</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211929086529090030001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PETROL BS LOM AC   ZAHDOLENJI LOGATSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-05</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">79.79</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-07</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-05</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9BTY4GVL</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211929086529090090001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Blazic  robni trakoviLjubljanaSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-05</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">25.64</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-08</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-07</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9C17AUJJ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211938765529072090001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>AKUSHAPER SOFTWARE AAKUSHAPER.COMUSA4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-07</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">93.31</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-09</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-07</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9C6FRDEA</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR211949121229094020001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BAUHAUS d.o.o.  k.d. 9LjubljanaSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-07</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">59.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-27</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-27</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9F5ELSR0</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212128714527822000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>JANEZ D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>ULICA JUSA KOZAKA 1  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56020850014663079</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>CMDT</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00900073</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO OPOMINA 900073</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-27</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">7.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-01-30</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-01-31</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9FN5L7FL</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212161460407617020001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NLB D.D.</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>029000000200020</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <Purp>
+        <Cd>FCOL</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>POSL.PAKET NAPREDNI 2 NOVOUST.</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-01-31</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">10259.59</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-13</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-13</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9HYC6K4S</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>CR212290098660694000001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>KLUN TARA</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>JANKA RIBICA 2  LJUTOMER</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56023431899858047</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>OTHR</Cd>
+      </Purp>
+      <RmtInf>
+        <Ustrd>PLACILO AVANSA 2026-02-001</Ustrd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-13</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">14.78</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-13</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-13</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9HYC6K64</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212298126173301000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - PRORACUN DRZAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORCICEVA ULICA 20  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>TAXS</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-80004</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO DAVKA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-13</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1652.04</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-13</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-13</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9HYC6K6C</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212296033983547010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>J.U.A. FRISCHEIS D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>CELOVSKA CESTA 492  1000  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56290000050240619</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BACXSI22</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>COST</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0060760-6500030</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO RACUNA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-13</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">844.87</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-13</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-13</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9HYC6K6Q</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212293869183581010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>J.U.A. FRISCHEIS D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>CELOVSKA CESTA 492  1000  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56290000050240619</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BACXSI22</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>COST</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0060760-6521133</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO RACUNA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-13</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">66.87</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-13</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-13</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9HYC6K70</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212299153483610010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>J.U.A. FRISCHEIS D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>CELOVSKA CESTA 492  1000  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56290000050240619</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BACXSI22</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>COST</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0060760-6519717</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO RACUNA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-13</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">25.28</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-15</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P10</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212333544729050050001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>AKUSHAPER SOFTWARE AAKUSHAPER.COMUSA4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-15</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">25648.29</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-16</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-16</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JF2TMRJ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>CR212329996275260000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>BOR ANTOLIc</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>NEUBERGERJEVA ULICA 15  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56076657219266904</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>GORESI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>OTHR</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI002026-02-002</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>DRUGO</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-16</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">4270.00</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P2L</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>CR212333167532507000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MATEJKA KETIŠ, S.P.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>BANOVCI 1  VERZEJ</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56023430260039388</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>CMDT</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI002025-12-014</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>MIZARSKO POHISTVO ZA SALON</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">174.95</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P2S</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212334763852452010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - ZPIZ</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOLODVORSKA ULICA 15  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008882000003</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-44008</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PRISPEVKI ZA PIZ PLACA 12-2025</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">148.17</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P2X</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212337375752479010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - ZZZS</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>MIKLOSICEVA CESTA 24  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008883000073</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-45004</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PRISPEVKI ZA ZDRAVSTVO PLACA 12-2025</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1.44</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P34</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212335436752491010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - PRORACUN DRZAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORCICEVA ULICA 20  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-42005</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PRISPEVKI ZA ZAPOSLOVANJE PLACA 12-2025</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1.44</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P38</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212335559252506010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - PRORACUN DRZAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORCICEVA ULICA 20  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-43001</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PRISPEVKI ZA STARSEVSKO VARSTVO PLACA 12-2</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">462.51</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P3E</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212336033952523000002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>KETIS ZAN</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>BERKOVCI 12  9244 SVETI JURIJ OB SCAVNICI</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000061597808</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+        <Ustrd>PLACA 12-2025 NAKAZILO PLAC NA OSR</Ustrd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">855.12</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-17</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JL52P3L</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212335559252555010002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>KETIS ZAN</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>BERKOVCI 12  9244 SVETI JURIJ OB SCAVNICI</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000061597808</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>PRCP</Cd>
+      </Purp>
+      <RmtInf>
+        <Ustrd>SKUPAJ DODATKI PLACA 12-2025 NAKAZILO PLAC</Ustrd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">28.10</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-19</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-17</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JXQF3KL</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212356009929142140001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>KRESAL STEKLARSTVO LLjubljanaSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-17</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">59.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-18</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-18</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JS4FGKQ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">0.41</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212342853280631000003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>JANEZ D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>ULICA JUSA KOZAKA 1  LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56020850014663079</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>CMDT</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI005806-91795303</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO RACUNA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-18</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">0.41</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-18</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-18</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JS4FGLE</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0018022026</EndToEndId>
+        <TxId>CH2348004987520260218</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NOVA LJUBLJANSKA BANKA D.D.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>TRG REPUBLIKE 2 1520 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56029000000200020</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Prtry>A3011</Prtry>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0018022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PROVIZIJA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-18</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">63.39</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-20</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-18</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9K47RMAG</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212364443029083080001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PETROL BS LJUBLJANALJUBLJANASVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-18</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">491.73</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-19</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JXQF3LA</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212354681175042010003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>KRESAL STEKLARSTVO D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>CELOVSKA CESTA 275  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000060858765</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>OTHR</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI009826</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO RACUNA 98-26</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1.05</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-19</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9JXQF3LG</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0019022026</EndToEndId>
+        <TxId>CH2348004987520260219</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NOVA LJUBLJANSKA BANKA D.D.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>TRG REPUBLIKE 2 1520 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56029000000200020</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Prtry>A3011</Prtry>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0019022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PROVIZIJA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">26.82</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNB8</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529349020001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>TRG. MAVRICA RUDNIKLJUBLJANASVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">199.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNBG</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529349080001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BAUHAUS d.o.o.  k.d. 9LjubljanaSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">63.78</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNBX</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529349140001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>OBNOVA PE CRNUCE LJULJUBLJANA CSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">179.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-19</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNCJ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529349200001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>LESTROJ TRZIN       TRZINSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-19</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">22.53</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-20</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNCQ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529349260001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BLIK D.O.O. LJUBLJANLJUBLJANA SSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-20</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">416.22</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-20</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNND6</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212394198529350010001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BLIK D.O.O. LJUBLJANLJUBLJANA SSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-20</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">190.00</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-21</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNN7X</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212370285949040000003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - PRORACUN DRZAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORCICEVA ULICA 20  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>TAXS</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-80004</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO DAVKA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-21</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">102.36</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNEN</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDS4</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212395959947033010003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - PRORAcUN DRzAVE</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>GREGORcIcEVA ULICA 20  1000 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>TAXS</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-40002</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>DAVKI OD OSEBNIH PREJEMKOV PLACA 1-</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1000.04</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNFA</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDVA</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212396815047035010003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>KETIs ZAN</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>BERKOVCI 12  9244 SVETI JURIJ OB ScAVNICI</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000061597808</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI99</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACA 1-2026 NAKAZILO PLAC NA OSR</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">2.96</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNFS</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDTE</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212394436247469000003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>91795303</Id>
+                <SchmeNm>
+                  <Cd>TXID</Cd>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - Proračun drŽave</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>Gregorčičeva ulica 20  1000 Ljubljana</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-42005</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Prispevki za zaposlovanje Plača 1-2</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">814.40</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNG6</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDVQ</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212398691547469020003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>91795303</Id>
+                <SchmeNm>
+                  <Cd>TXID</Cd>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>KetiŠ Žan</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>Berkovci 12  9244 Sveti Jurij ob Ščavnici</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000061597808</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>PRCP</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI99</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Skupaj dodatki Plača 1-2026</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">266.12</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNGJ</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDUS</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212396914247470010003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>91795303</Id>
+                <SchmeNm>
+                  <Cd>TXID</Cd>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - ZZZS</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>Miklo ičeva cesta 24  1000 Ljubljana</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008883000073</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-45004</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Prispevki za zdravstvo Plača 1-2026</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">360.84</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNH0</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDUC</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212398521647471010003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>91795303</Id>
+                <SchmeNm>
+                  <Cd>TXID</Cd>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - ZPIZ</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>Kolodvorska ulica 15  1000 Ljubljana</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008882000003</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-44008</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Prispevki za PIZ Plača 1-2026</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">2.96</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNHE</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <InstrId>10003FFT9K6LHDTU</InstrId>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212395169347472020003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>91795303</Id>
+                <SchmeNm>
+                  <Cd>TXID</Cd>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>PDP - Proračun drŽave</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>Gregorčičeva ulica 20  1000 Ljubljana</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56011008881000030</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BSLJSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>LBRI</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI1991795303-43001</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Prispevki za starševsko varstvo Pla</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">8.40</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-23</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KKXNNHS</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0023022026</EndToEndId>
+        <TxId>CH2348004987520260223</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NOVA LJUBLJANSKA BANKA D.D.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>TRG REPUBLIKE 2 1520 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56029000000200020</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Prtry>A3011</Prtry>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0023022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PROVIZIJA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">5.01</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-25</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-23</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9KXAQKL6</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI00</EndToEndId>
+        <TxId>DR212419038229101050001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI00</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>SBS Lavrica SkofljicSkofljicaSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-23</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">13.32</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>PDNG</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-27</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-25</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L52PGAN</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0027022026</EndToEndId>
+        <TxId>DR212436993429085020001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <Purp>
+        <Cd>    </Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0027022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>MAVRICA ILIR. BISTRICAILIRSKA BISTRSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-25</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">72.74</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>PDNG</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-27</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-25</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L52PHD8</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0027022026</EndToEndId>
+        <TxId>DR212436993429085080001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <Purp>
+        <Cd>    </Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0027022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>BS MOL Ilirska BistrILIRSKA BISTRSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-25</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">10.16</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>PDNG</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-27</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-25</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L52PJ7U</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0027022026</EndToEndId>
+        <TxId>DR212436993429085140001</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>-</Nm>
+          <PstlAdr>
+            <AdrLine>-</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <Othr>
+              <Id>-</Id>
+            </Othr>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <Purp>
+        <Cd>    </Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0027022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>MAVRICA ILIR. BISTRICAILIRSKA BISTRSVN4466173513291082</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-25</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">15972.24</Amt>
+
+  <CdtDbtInd>CRDT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-26</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-26</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L3KA40A</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI002026-02-003</EndToEndId>
+        <TxId>CR212423547329569020002</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>M - ENERGETIKA D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>PLESE 2  9000 MURSKA SOBOTA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56340001017439572</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>KSPKSI22XXX</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2XXXX</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>ADVA</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI002026-02-003</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>Priliv</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-26</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">119.35</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-26</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-26</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L3KA40X</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <Chrgs>
+    <Amt Ccy="EUR">1.05</Amt>
+  </Chrgs>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>NOTPROVIDED</EndToEndId>
+        <TxId>DR212424164842071000003</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>JP KOMUNALA ILIRSKA BISTRICA, D.O.O</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>PRESERNOVA ULICA 7  ILIRSKA BISTRICA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56101000000023081</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>BAKOSI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Cd>OTHR</Cd>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI120051980715262</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PLACILO PO OPOMINU</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-26</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+<Ntry>
+
+  <Amt Ccy="EUR">1.05</Amt>
+
+  <CdtDbtInd>DBIT</CdtDbtInd>
+
+  <Sts>BOOK</Sts>
+
+  <BookgDt>
+    <Dt>2026-02-26</Dt>
+  </BookgDt>
+
+  <ValDt>
+    <Dt>2026-02-26</Dt>
+  </ValDt>
+
+  <AcctSvcrRef>16NPYRKT9L3KA414</AcctSvcrRef>
+
+  <BkTxCd>
+    <Prtry>
+      <Cd>NOTPROVIDED</Cd>
+    </Prtry>
+  </BkTxCd>
+
+  <NtryDtls>
+    <TxDtls>
+      <Refs>
+        <EndToEndId>SI0026022026</EndToEndId>
+        <TxId>CH2348004987520260226</TxId>
+      </Refs>
+      <RltdPties>
+        <Dbtr>
+          <Nm>MIZARSTVO PRAVI KOT D.O.O.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>KOSEZE 54A</AdrLine>
+            <AdrLine>6250 ILIRSKA BISTRICA</AdrLine>
+          </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>SI56028430266336863</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Cdtr>
+          <Nm>NOVA LJUBLJANSKA BANKA D.D.</Nm>
+          <PstlAdr>
+            <Ctry>SI</Ctry>
+            <AdrLine>TRG REPUBLIKE 2 1520 LJUBLJANA</AdrLine>
+            <AdrLine>-</AdrLine>
+          </PstlAdr>
+        </Cdtr>
+        <CdtrAcct>
+          <Id>
+            <IBAN>SI56029000000200020</IBAN>
+          </Id>
+        </CdtrAcct>
+      </RltdPties>
+      <RltdAgts>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtrAgt>
+          <FinInstnId>
+            <BIC>LJBASI2X</BIC>
+          </FinInstnId>
+        </CdtrAgt>
+      </RltdAgts>
+      <Purp>
+        <Prtry>A3011</Prtry>
+      </Purp>
+      <RmtInf>
+        <Strd>
+          <CdtrRefInf>
+            <Ref>SI0026022026</Ref>
+          </CdtrRefInf>
+          <AddtlRmtInf>PROVIZIJA</AddtlRmtInf>
+        </Strd>
+      </RmtInf>
+      <RltdDts>
+        <IntrBkSttlmDt>2026-02-26</IntrBkSttlmDt>
+      </RltdDts>
+    </TxDtls>
+  </NtryDtls>
+
+</Ntry>
+    </Rpt>
+  </BkToCstmrAcctRpt>
+
+</Document>
+

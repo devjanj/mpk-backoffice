@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  status      String    @default("PLANNED") // PLANNED, IN_PROGRESS, COMPLETED, CANCELLED
+  clientName  String?
+  startDate   DateTime?
+  endDate     DateTime?
+  price       Float?
+  
+  invoices    Invoice[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Invoice {
+  id             String   @id @default(cuid())
+  invoiceNumber  String   @unique
+  amount         Float
+  currency       String   @default("EUR")
+  status         String   @default("UNPAID") // UNPAID, PAID, CANCELLED
+  issueDate      DateTime @default(now())
+  dueDate        DateTime?
+  
+  // File details
+  driveFileId    String?
+  driveFileLink  String?
+  
+  // Relations
+  projectId      String?
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Earnings {
+  id          String   @id @default(cuid())
+  amount      Float
+  currency    String   @default("EUR")
+  date        DateTime @default(now())
+  source      String?  // e.g., "Invoice #123", "Direct Sale"
+  description String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TransactionSplit {
+  id              String   @id @default(cuid())
+  transactionHash String   // A unique fingerprint combining date+amount+balance to map database allocation to an immutable Excel row
+  projectNumber   String   // The project this split is allocated to
+  amount          Float    // The monetary value of this split
+  note            String?  // Optional explanation for this split
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([transactionHash]) // Optimizes lookups since we will scan this hash for every row parsed from Excel
+}
