@@ -1,7 +1,13 @@
 import { google } from 'googleapis';
 
 function getGoogleAuth() {
-    const customPrivateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+    let customPrivateKey = process.env.GOOGLE_PRIVATE_KEY || '';
+
+    // Vercel sometimes wraps env strings in literal quotes and double-escapes newlines
+    if (customPrivateKey.startsWith('"') && customPrivateKey.endsWith('"')) {
+        customPrivateKey = customPrivateKey.slice(1, -1);
+    }
+    customPrivateKey = customPrivateKey.replace(/\\n/g, '\n');
 
     if (!customPrivateKey || !process.env.GOOGLE_CLIENT_EMAIL) {
         throw new Error('Google Cloud credentials missing from environment variables');
