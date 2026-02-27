@@ -8,6 +8,7 @@ import { CombinedCurrentBalanceCard } from '@/components/CombinedCurrentBalanceC
 import { FolderKanban, LogOut, FileText, ArrowUpRight, TrendingUp, BarChart3, Euro } from 'lucide-react'
 import { getFinanceDashboardMetrics } from '@/lib/google-sheets'
 import Link from 'next/link'
+import { CFBackgroundFetcher } from '@/components/CFBackgroundFetcher'
 
 export default async function DashboardPage() {
   const session = await getSession()
@@ -20,8 +21,8 @@ export default async function DashboardPage() {
     ? `€ ${metrics.currentMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     : "€ 0,00"
 
-  const novemberIncomeFormatted = metrics
-    ? `€ ${metrics.novemberIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  const previousIncomeFormatted = metrics
+    ? `€ ${metrics.previousMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     : "€ 0,00"
 
   const incomeChangeFormatted = metrics?.percentageChange
@@ -49,7 +50,7 @@ export default async function DashboardPage() {
           <MetricCard
             title={`Income (${metrics?.currentMonthName || 'This Month'})`}
             value={incomeCurrentFormatted}
-            trend={`${novemberIncomeFormatted} in November`}
+            trend={`${previousIncomeFormatted} in ${metrics?.previousMonthName || 'Previous Month'}`}
             icon={<TrendingUp className={`w-5 h-5 ${isPositiveTrend ? 'text-green-500' : 'text-red-500'}`} />}
           />
           <MetricCard
@@ -117,6 +118,7 @@ export default async function DashboardPage() {
         </div>
 
         <FinanceSyncButton />
+        <CFBackgroundFetcher />
       </main>
     </div>
   )

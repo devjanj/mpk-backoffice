@@ -18,8 +18,8 @@ export default async function CFEarningsPage() {
         ? `€ ${metrics.currentMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
         : "€ 0,00"
 
-    const novemberIncomeFormatted = metrics
-        ? `€ ${metrics.novemberIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    const previousIncomeFormatted = metrics
+        ? `€ ${metrics.previousMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
         : "€ 0,00"
 
     const incomeChangeFormatted = metrics?.percentageChange
@@ -57,7 +57,7 @@ export default async function CFEarningsPage() {
                     <MetricCard
                         title={`Income (${metrics?.currentMonthName || 'This Month'})`}
                         value={incomeCurrentFormatted}
-                        trend={`${novemberIncomeFormatted} in November`}
+                        trend={`${previousIncomeFormatted} in ${metrics?.previousMonthName || 'Previous Month'}`}
                         icon={<TrendingUp className={`w-5 h-5 ${isPositiveTrend ? 'text-green-500' : 'text-red-500'}`} />}
                     />
                     <MetricCard

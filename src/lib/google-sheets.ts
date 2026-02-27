@@ -6,6 +6,19 @@ import * as xlsx from 'xlsx'
 import crypto from 'crypto'
 import { getLocalXMLTransactions, parseEuropeanNumberHelper, formatEuropeanNumberHelper } from './xml-parser'
 
+function formatMonthLabel(m: string): string {
+    if (!m) return m
+    const parts = m.split('.')
+    if (parts.length >= 2) {
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        const monthNum = parseInt(parts[0]) - 1
+        if (monthNum >= 0 && monthNum <= 11) {
+            return monthNames[monthNum]
+        }
+    }
+    return m
+}
+
 export async function findFinanceSheetId(): Promise<string | null> {
     try {
         // Search the drive for the specific file name the user provided
@@ -185,7 +198,7 @@ export async function getFinanceDashboardMetrics() {
     const last6Months = allMonths.slice(-6)
 
     const historicalBalances = last6Months.map(month => ({
-        month,
+        month: formatMonthLabel(month),
         balance: monthlyBalances[month]
     }))
 
@@ -208,14 +221,19 @@ export async function getFinanceDashboardMetrics() {
         percentageChange = 100
     }
 
+    if (currentBalanceStr !== "€ 0,00") {
+        const parsedBalance = parseEuropeanNumber(currentBalanceStr)
+        currentBalanceStr = `€ ${parsedBalance.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    }
+
     return {
         currentBalance: currentBalanceStr,
         currentMonthIncome,
         previousMonthIncome,
         novemberIncome,
         percentageChange,
-        currentMonthName: lastActiveMonth,
-        previousMonthName: previousActiveMonth,
+        currentMonthName: formatMonthLabel(lastActiveMonth),
+        previousMonthName: formatMonthLabel(previousActiveMonth),
         historicalBalances,
         rawData: enrichedData.slice(-5).reverse() // Pass the 5 latest records for a table preview
     }
@@ -392,9 +410,14 @@ export async function getCFDashboardMetrics() {
     const last6Months = allMonths.slice(-6)
 
     const historicalBalances = last6Months.map(month => ({
-        month,
+        month: formatMonthLabel(month),
         balance: monthlyBalances[month]
     }))
+
+    if (currentBalanceStr !== "€ 0,00") {
+        const parsedBalance = parseEuropeanNumber(currentBalanceStr)
+        currentBalanceStr = `€ ${parsedBalance.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    }
 
     return {
         currentBalance: currentBalanceStr,
@@ -402,8 +425,8 @@ export async function getCFDashboardMetrics() {
         previousMonthIncome,
         novemberIncome,
         percentageChange,
-        currentMonthName: lastActiveMonth,
-        previousMonthName: previousActiveMonth,
+        currentMonthName: formatMonthLabel(lastActiveMonth),
+        previousMonthName: formatMonthLabel(previousActiveMonth),
         historicalBalances,
         rawData: enrichedData.slice(-5).reverse(), // Pass the 5 latest records for a table preview
         allRawData: enrichedData
