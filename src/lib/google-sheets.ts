@@ -235,6 +235,7 @@ export async function getFinanceDashboardMetrics() {
         currentMonthName: formatMonthLabel(lastActiveMonth),
         previousMonthName: formatMonthLabel(previousActiveMonth),
         historicalBalances,
+        allRawData: enrichedData,
         rawData: enrichedData.slice(-5).reverse() // Pass the 5 latest records for a table preview
     }
 }

@@ -5,6 +5,7 @@ import { FinanceRow } from '@/lib/google-sheets'
 import { FolderKanban, Search, Link as LinkIcon, Split } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { parseEuropeanNumber } from '@/components/CFCacheManager'
+import { TransactionSplitModal } from '@/components/TransactionSplitModal'
 
 function StatCard({ title, value, valueClass }: { title: string, value: string, valueClass: string }) {
     return (
@@ -19,6 +20,59 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
     const [selectedProject, setSelectedProject] = useState<string>('')
     const [combinedData, setCombinedData] = useState<FinanceRow[]>([])
     const [splits, setSplits] = useState<any[]>([])
+    const [projectStatuses, setProjectStatuses] = useState<Record<string, string>>({})
+    const [isUpdatingStatus, setIsUpdatingStatus] = useState(false)
+
+    // Modal State
+    const [selectedTx, setSelectedTx] = useState<FinanceRow | null>(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    // Fetch Splits
+    const fetchSplits = () => {
+        fetch('/api/transaction-splits')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setSplits(data.data)
+                }
+            })
+            .catch(err => console.error("Failed to fetch splits:", err))
+    };
+
+    const fetchStatuses = () => {
+        fetch('/api/project-status')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const statusMap: Record<string, string> = {}
+                    data.data.forEach((ps: any) => {
+                        statusMap[ps.projectNumber] = ps.status
+                    })
+                    setProjectStatuses(statusMap)
+                }
+            })
+            .catch(err => console.error("Failed to fetch project statuses:", err))
+    };
+
+    const toggleProjectStatus = async (status: 'ACTIVE' | 'FINISHED') => {
+        if (!selectedProject || isUpdatingStatus) return;
+        setIsUpdatingStatus(true);
+        try {
+            const res = await fetch('/api/project-status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ projectNumber: selectedProject, status })
+            });
+            const data = await res.json();
+            if (data.success) {
+                setProjectStatuses(prev => ({ ...prev, [selectedProject]: status }));
+            }
+        } catch (err) {
+            console.error("Failed to toggle status", err);
+        } finally {
+            setIsUpdatingStatus(false);
+        }
+    }
 
     // On mount, check if there's any CF data cached in localStorage and merge it
     useEffect(() => {
@@ -47,15 +101,9 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
             console.error("Failed to parse CF data for Projects Dashboard", e)
         }
 
-        // Fetch Splits
-        fetch('/api/transaction-splits')
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setSplits(data.data)
-                }
-            })
-            .catch(err => console.error("Failed to fetch splits:", err))
+        // Fetch Splits and Statuses
+        fetchSplits()
+        fetchStatuses()
     }, [initialData])
 
     // Extract unique project numbers (filtering out total blanks)
@@ -177,6 +225,31 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                         ))}
                     </select>
                 </div>
+
+                {selectedProject && (
+                    <div className="flex bg-muted/30 p-1 rounded-xl shrink-0 mt-4 md:mt-0 relative overflow-hidden">
+                        <button
+                            onClick={() => toggleProjectStatus('ACTIVE')}
+                            disabled={isUpdatingStatus}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold z-10 transition-all ${(projectStatuses[selectedProject] || 'ACTIVE') === 'ACTIVE'
+                                    ? 'bg-background shadow-sm text-foreground'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            Active
+                        </button>
+                        <button
+                            onClick={() => toggleProjectStatus('FINISHED')}
+                            disabled={isUpdatingStatus}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold z-10 transition-all ${projectStatuses[selectedProject] === 'FINISHED'
+                                    ? 'bg-background shadow-sm text-foreground'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            Finished
+                        </button>
+                    </div>
+                )}
             </div>
 
             <AnimatePresence mode="wait">
@@ -215,7 +288,14 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                                     </thead>
                                     <tbody className="divide-y divide-border/50">
                                         {filteredData.map((tx, i) => (
-                                            <tr key={i} className="hover:bg-muted/30 transition-colors">
+                                            <tr
+                                                key={i}
+                                                className="hover:bg-muted/30 transition-colors cursor-pointer"
+                                                onClick={() => {
+                                                    setSelectedTx(tx)
+                                                    setIsModalOpen(true)
+                                                }}
+                                            >
                                                 <td className="px-6 py-4 text-muted-foreground whitespace-nowrap">{tx.date || tx.month}</td>
                                                 <td className="px-6 py-4 font-medium text-foreground">
                                                     <div className="flex flex-col gap-1 items-start">
@@ -262,6 +342,14 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                     <p className="text-sm text-muted-foreground max-w-sm mx-auto">Choose a project number from the dropdown above to view its transaction history and financial breakdown.</p>
                 </motion.div>
             )}
+
+            <TransactionSplitModal
+                transaction={selectedTx}
+                existingSplits={splits.filter(s => s.transactionHash === selectedTx?.id)}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSave={fetchSplits}
+            />
         </div>
     )
 }

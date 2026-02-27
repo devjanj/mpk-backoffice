@@ -67,3 +67,9 @@ model TransactionSplit {
 
   @@index([transactionHash]) // Optimizes lookups since we will scan this hash for every row parsed from Excel
 }
+
+model ProjectStatus {
+  projectNumber   String   @id
+  status          String   @default("ACTIVE") // ACTIVE, FINISHED
+  updatedAt       DateTime @updatedAt
+}
