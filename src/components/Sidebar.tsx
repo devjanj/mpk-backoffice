@@ -29,8 +29,9 @@ export function Sidebar() {
                 <nav className="space-y-2">
                     <SidebarItem icon={<BarChart3 />} label="Overview" href="/" active={pathname === '/'} />
                     <SidebarItem icon={<FolderKanban />} label="Projects" href="/projects" active={pathname === '/projects'} />
-                    <SidebarItem icon={<FileText />} label="Invoices" href="/invoices" active={pathname === '/invoices'} />
+                    <SidebarItem icon={<FileText />} label="Invoices (Bank + CF)" href="/invoices" active={pathname === '/invoices'} />
                     <SidebarItem icon={<Wallet />} label="Earnings (CF)" href="/earnings/cf" active={pathname === '/earnings/cf'} />
+                    <SidebarItem icon={<Euro />} label="Earnings (Bank)" href="/earnings/bank" active={pathname === '/earnings/bank'} />
                 </nav>
             </div>
 
