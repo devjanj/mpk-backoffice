@@ -4,7 +4,7 @@ import { MetricCard } from '@/components/MetricCard'
 import { BalanceChart } from '@/components/BalanceChart'
 import { getFinanceDashboardMetrics } from '@/lib/google-sheets'
 import { Euro, TrendingUp, BarChart3, Wallet } from 'lucide-react'
-import { EarningsBankClient } from '@/components/EarningsBankClient'
+import { EarningsClientTable } from '@/components/EarningsClientTable'
 
 export default async function BankEarningsPage() {
     const session = await getSession()
@@ -71,7 +71,7 @@ export default async function BankEarningsPage() {
                 )}
 
                 {/* Interactive Bank Transactions List */}
-                <EarningsBankClient transactions={metrics?.allRawData || []} />
+                <EarningsClientTable title="Bank Transactions" transactions={metrics?.allRawData || []} />
 
             </main>
         </div>

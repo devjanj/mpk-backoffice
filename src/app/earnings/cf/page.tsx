@@ -6,6 +6,7 @@ import { CFCacheManager } from '@/components/CFCacheManager'
 import { getCFDashboardMetrics } from '@/lib/google-sheets'
 import { Euro, TrendingUp, BarChart3, Wallet, FileText, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import { EarningsClientTable } from '@/components/EarningsClientTable'
 
 export default async function CFEarningsPage() {
     const session = await getSession()
@@ -73,55 +74,9 @@ export default async function CFEarningsPage() {
                     <BalanceChart data={metrics.historicalBalances} />
                 )}
 
-                {/* Recent CF Transactions */}
-                <div className="bg-card border border-border/50 rounded-3xl p-6 shadow-sm">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-semibold text-lg flex items-center gap-2">
-                            <FileText className="w-5 h-5 text-primary" />
-                            Recent Transactions
-                        </h3>
-                    </div>
+                {/* Interactive CF Transactions List */}
+                <EarningsClientTable title="CF Transactions" transactions={metrics?.allRawData || []} />
 
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left">
-                            <thead className="bg-muted/50 text-muted-foreground uppercase text-xs">
-                                <tr>
-                                    <th className="px-6 py-4 font-semibold">Date</th>
-                                    <th className="px-6 py-4 font-semibold">Project #</th>
-                                    <th className="px-6 py-4 font-semibold">Description</th>
-                                    <th className="px-6 py-4 font-semibold text-green-600 dark:text-green-500">Income</th>
-                                    <th className="px-6 py-4 font-semibold text-red-600 dark:text-red-500">Outcome</th>
-                                    <th className="px-6 py-4 font-semibold">Note</th>
-                                    <th className="px-6 py-4 font-semibold">Invoice URL</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-border/50">
-                                {metrics?.rawData && metrics.rawData.map((row: any, i: number) => (
-                                    <tr key={i} className="hover:bg-muted/30 transition-colors">
-                                        <td className="px-6 py-4 whitespace-nowrap">{row.date}</td>
-                                        <td className="px-6 py-4 font-medium">{row.projectNumber}</td>
-                                        <td className="px-6 py-4 max-w-[200px] truncate" title={row.description}>{row.description}</td>
-                                        <td className="px-6 py-4 text-green-600 dark:text-green-500 font-medium">{row.income || '-'}</td>
-                                        <td className="px-6 py-4 text-red-600 dark:text-red-500 font-medium">{row.outcome || '-'}</td>
-                                        <td className="px-6 py-4 max-w-[150px] truncate" title={row.note}>{row.note}</td>
-                                        <td className="px-6 py-4">
-                                            {row.invoiceUrl ? (
-                                                <Link href={row.invoiceUrl} target="_blank" className="text-primary hover:underline flex items-center gap-1">
-                                                    Link <ArrowUpRight className="w-3 h-3" />
-                                                </Link>
-                                            ) : '-'}
-                                        </td>
-                                    </tr>
-                                ))}
-                                {!metrics?.rawData || metrics.rawData.length === 0 && (
-                                    <tr>
-                                        <td colSpan={7} className="text-center py-8 text-muted-foreground">No recent transactions found.</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </main>
         </div>
     )

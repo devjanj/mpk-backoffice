@@ -340,7 +340,12 @@ export async function getCFDashboardMetrics() {
     let activeMonth = ""
     const enrichedData = data.map(row => {
         if (row.month?.trim()) activeMonth = row.month.trim()
-        return { ...row, activeMonth }
+        return {
+            ...row,
+            activeMonth,
+            notes: row.note,
+            transactionUrl: row.invoiceUrl
+        }
     })
 
     let currentBalanceStr = "€ 0,00"
