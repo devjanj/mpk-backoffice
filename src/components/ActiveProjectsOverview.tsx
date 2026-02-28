@@ -1,16 +1,18 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { FolderKanban, TrendingUp, TrendingDown, Clock } from 'lucide-react'
+import { FolderKanban, TrendingUp, TrendingDown, Clock, Plus } from 'lucide-react'
 import { FinanceRow } from '@/lib/google-sheets'
 import { parseEuropeanNumber } from '@/components/CFCacheManager'
 import Link from 'next/link'
+import { AddInvoiceModal } from '@/components/AddInvoiceModal'
 
 export function ActiveProjectsOverview({ initialData }: { initialData: FinanceRow[] }) {
     const [combinedData, setCombinedData] = useState<FinanceRow[]>([])
     const [splits, setSplits] = useState<any[]>([])
     const [projectStatuses, setProjectStatuses] = useState<Record<string, string>>({})
     const [isLoading, setIsLoading] = useState(true)
+    const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false)
 
     useEffect(() => {
         let cfData: FinanceRow[] = []
@@ -119,9 +121,18 @@ export function ActiveProjectsOverview({ initialData }: { initialData: FinanceRo
                     <FolderKanban className="w-5 h-5 text-primary" />
                     Active Projects Overview
                 </h3>
-                <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
-                    {activeProjectStats.length} Active
-                </span>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setIsInvoiceModalOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary font-medium rounded-xl transition-all"
+                    >
+                        <Plus className="w-4 h-4" />
+                        Add Invoice
+                    </button>
+                    <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
+                        {activeProjectStats.length} Active
+                    </span>
+                </div>
             </div>
 
             <div className="overflow-x-auto">
@@ -179,6 +190,12 @@ export function ActiveProjectsOverview({ initialData }: { initialData: FinanceRo
                     </tbody>
                 </table>
             </div>
+
+            <AddInvoiceModal
+                isOpen={isInvoiceModalOpen}
+                onClose={() => setIsInvoiceModalOpen(false)}
+                existingProjectNumbers={activeProjectStats.map(p => p.projectNumber)}
+            />
         </div>
     )
 }

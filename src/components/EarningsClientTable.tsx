@@ -2,13 +2,15 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { FinanceRow } from '@/lib/google-sheets'
-import { FileText, ArrowUpRight, ChevronLeft, ChevronRight, ArrowUpDown, ArrowDown, ArrowUp } from 'lucide-react'
+import { FileText, ArrowUpRight, ChevronLeft, ChevronRight, ArrowUpDown, ArrowDown, ArrowUp, Plus } from 'lucide-react'
 import Link from 'next/link'
 import { TransactionSplitModal } from '@/components/TransactionSplitModal'
+import { AddInvoiceModal } from '@/components/AddInvoiceModal'
 
 export function EarningsClientTable({ transactions, title }: { transactions: FinanceRow[], title: string }) {
     const [selectedTx, setSelectedTx] = useState<FinanceRow | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false)
     const [splits, setSplits] = useState<any[]>([])
 
     const fetchSplits = () => {
@@ -104,6 +106,13 @@ export function EarningsClientTable({ transactions, title }: { transactions: Fin
                     <FileText className="w-5 h-5 text-primary" />
                     {title}
                 </h3>
+                <button
+                    onClick={() => setIsInvoiceModalOpen(true)}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary font-medium rounded-xl transition-all"
+                >
+                    <Plus className="w-4 h-4" />
+                    Add Invoice
+                </button>
             </div>
 
             <div className="overflow-x-auto">
@@ -196,6 +205,13 @@ export function EarningsClientTable({ transactions, title }: { transactions: Fin
                     setSelectedTx(null)
                 }}
                 onSave={fetchSplits}
+            />
+
+            {/* Global Add Invoice / OCR Dropzone */}
+            <AddInvoiceModal
+                isOpen={isInvoiceModalOpen}
+                onClose={() => setIsInvoiceModalOpen(false)}
+                existingProjectNumbers={Array.from(new Set(transactions.map(t => t.projectNumber).filter(p => p && p !== '-')))}
             />
         </div>
     )

@@ -22,38 +22,23 @@
 }
 
 :root {
-  /* Default light mode */
-  --background: #f8fafc;
-  --foreground: #020617;
-  --card: #ffffff;
-  --card-foreground: #020617;
-  --primary: #92400e; /* Amber-800 focus for wood theme */
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f59e0b; /* Bright amber */
+  /* Enforced Dark Mode for the entire Backoffice */
+  --background: #020617;
+  /* Very dark slate */
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --primary: #d97706;
+  /* Amber-600 focus for wood theme */
+  --primary-foreground: #020617;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #f59e0b;
+  /* Bright amber */
   --accent-foreground: #020617;
-  --border: #e2e8f0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617; /* Very dark slate */
-    --foreground: #f8fafc;
-    --card: #0f172a;
-    --card-foreground: #f8fafc;
-    --primary: #d97706; /* Amber-600 */
-    --primary-foreground: #020617;
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --accent: #f59e0b;
-    --accent-foreground: #020617;
-    --border: #1e293b;
-  }
+  --border: #1e293b;
 }
 
 body {

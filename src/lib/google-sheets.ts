@@ -3,7 +3,9 @@
 import { sheetsClient, driveClient } from '@/lib/google'
 import prisma from '@/lib/prisma'
 import * as xlsx from 'xlsx'
+import ExcelJS from 'exceljs'
 import crypto from 'crypto'
+import { Readable } from 'stream'
 import { getLocalXMLTransactions, parseEuropeanNumberHelper, formatEuropeanNumberHelper } from './xml-parser'
 
 function formatMonthLabel(m: string): string {
@@ -19,12 +21,27 @@ function formatMonthLabel(m: string): string {
     return m
 }
 
+function parseExcelDateToTimestamp(dateStr: string): number {
+    if (!dateStr) return 0
+    const parts = String(dateStr).trim().split('.')
+    if (parts.length === 3) {
+        return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0])).valueOf()
+    }
+    return 0
+}
+
 export async function findFinanceSheetId(): Promise<string | null> {
+    if (process.env.GOOGLE_SHEET_ID) {
+        return process.env.GOOGLE_SHEET_ID
+    }
+
     try {
         // Search the drive for the specific file name the user provided
         const response = await driveClient.files.list({
             q: "name = 'Merged_finance.xlsx' and trashed = false",
             fields: 'files(id, name)',
+            supportsAllDrives: true,
+            includeItemsFromAllDrives: true, // For list queries, this is also requested
         })
 
         const files = response.data.files
@@ -61,7 +78,7 @@ export async function syncFinanceSheet(): Promise<{ success: boolean; data?: Fin
 
         // Fetch the raw .xlsx file directly from Google Drive
         const fileResponse = await driveClient.files.get(
-            { fileId: spreadsheetId, alt: 'media' },
+            { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
             { responseType: 'arraybuffer' }
         )
 
@@ -94,8 +111,10 @@ export async function syncFinanceSheet(): Promise<{ success: boolean; data?: Fin
             const outcomeStr = String(row[4] || '')
             const balanceStr = String(row[5] || '')
 
-            // Generate deterministic fingerprint for database mapping
-            const rawString = `${dateStr}-${descriptionStr}-${incomeStr}-${outcomeStr}-${balanceStr}`
+            // Generate deterministic fingerprint for database mapping. 
+            // We EXPLICITLY ignore the balance column so that if users insert rows chronologically 
+            // and the balance cascades, the ID remains perfectly stable.
+            const rawString = `${dateStr}-${descriptionStr}-${incomeStr}-${outcomeStr}`
             const hashId = crypto.createHash('sha256').update(rawString).digest('hex')
 
             return {
@@ -116,6 +135,29 @@ export async function syncFinanceSheet(): Promise<{ success: boolean; data?: Fin
         let filteredData = parsedData.filter(row =>
             row.date !== '' || row.description !== '' || row.income !== '' || row.outcome !== ''
         )
+
+        // Dynamically calculate missing formulas
+        let runningBalance = 0;
+        for (let i = 0; i < filteredData.length; i++) {
+            const row = filteredData[i];
+
+            const rawCellBalance = parseEuropeanNumberHelper(row.currentBalance);
+            const inc = parseEuropeanNumberHelper(row.income) || 0;
+            const out = parseEuropeanNumberHelper(row.outcome) || 0;
+
+            if (i === 0) {
+                runningBalance = !isNaN(rawCellBalance) && row.currentBalance.trim() !== '' && !row.currentBalance.includes('[object')
+                    ? rawCellBalance
+                    : inc - Math.abs(out);
+            } else {
+                runningBalance = runningBalance + inc - Math.abs(out);
+            }
+
+            // ALWAYS override to the mathematically correct dynamically calculated value!
+            // This prevents the JS loop from snapping back to stale Google Sheet cached values 
+            // on rows situated after a chronologically spliced invoice.
+            row.currentBalance = formatEuropeanNumberHelper(runningBalance);
+        }
 
         console.log(`Successfully parsed ${filteredData.length} total finance records.`)
 
@@ -263,7 +305,7 @@ export async function syncCFSheet(): Promise<{ success: boolean; data?: CFRow[];
 
         // Fetch the raw .xlsx file directly from Google Drive
         const fileResponse = await driveClient.files.get(
-            { fileId: spreadsheetId, alt: 'media' },
+            { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
             { responseType: 'arraybuffer' }
         )
 
@@ -298,7 +340,8 @@ export async function syncCFSheet(): Promise<{ success: boolean; data?: CFRow[];
             const balanceStr = String(row[6] || '')
 
             // Generate deterministic fingerprint for database mapping
-            const rawString = `${finalDateStr}-${descriptionStr}-${incomeStr}-${outcomeStr}-${balanceStr}`
+            // EXCLUDE balance so chronological inserts don't orphan database splits
+            const rawString = `${finalDateStr}-${descriptionStr}-${incomeStr}-${outcomeStr}`
             const hashId = crypto.createHash('sha256').update(rawString).digest('hex')
 
             return {
@@ -323,6 +366,28 @@ export async function syncCFSheet(): Promise<{ success: boolean; data?: CFRow[];
             row.month.toLowerCase() !== 'mesec' &&
             row.description.toLowerCase() !== 'description'
         )
+
+        let runningBalance = 0;
+        for (let i = 0; i < filteredData.length; i++) {
+            const row = filteredData[i];
+
+            const rawCellBalance = parseEuropeanNumberHelper(row.currentBalance);
+            const inc = parseEuropeanNumberHelper(row.income) || 0;
+            const out = parseEuropeanNumberHelper(row.outcome) || 0;
+
+            if (i === 0) {
+                runningBalance = !isNaN(rawCellBalance) && row.currentBalance.trim() !== '' && !row.currentBalance.includes('[object')
+                    ? rawCellBalance
+                    : inc - Math.abs(out);
+            } else {
+                runningBalance = runningBalance + inc - Math.abs(out);
+            }
+
+            // ALWAYS override to the mathematically correct dynamically calculated value!
+            // This prevents the JS loop from snapping back to stale Google Sheet cached values 
+            // on rows situated after a chronologically spliced invoice.
+            row.currentBalance = formatEuropeanNumberHelper(runningBalance);
+        }
 
         return { success: true, data: filteredData }
     } catch (error: any) {
@@ -436,5 +501,207 @@ export async function getCFDashboardMetrics() {
         historicalBalances,
         rawData: enrichedData.slice(-5).reverse(), // Pass the 5 latest records for a table preview
         allRawData: enrichedData
+    }
+}
+
+export async function appendInvoiceToSheet(invoice: {
+    source: string,
+    date: string,
+    projectNumber: string,
+    description: string,
+    shortDescription?: string,
+    parsedAmount: number,
+    driveFileLink: string | null
+}) {
+    const spreadsheetId = await findFinanceSheetId()
+
+    if (!spreadsheetId) {
+        throw new Error('Could not find Merged_finance.xlsx in the shared Google Drive folder.')
+    }
+
+    const fileResponse = await driveClient.files.get(
+        { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+        { responseType: 'arraybuffer' }
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    await workbook.xlsx.load(fileResponse.data as ArrayBuffer)
+
+    const sheetName = invoice.source === 'CF' ? 'CF' : workbook.worksheets[0].name
+    const sheet = workbook.getWorksheet(sheetName)
+
+    if (!sheet) {
+        throw new Error(`Sheet tab ${sheetName} not found in Merged_finance.xlsx`)
+    }
+
+    const income = invoice.parsedAmount >= 0 ? invoice.parsedAmount : null
+    const outcome = invoice.parsedAmount < 0 ? Math.abs(invoice.parsedAmount) : null
+
+    // Find the true last row
+    let trueBottom = sheet.rowCount
+    for (let i = sheet.rowCount; i >= 1; i--) {
+        const row = sheet.getRow(i)
+        const colA = String(row.getCell(1).value || '').trim()
+        if (colA !== '' && colA.length >= 3 && colA !== '-' && colA !== 'undefined') {
+            trueBottom = i
+            break
+        }
+    }
+
+    // Chronological Insertion Logic
+    let insertIndexRow = trueBottom + 1
+    const newDateVal = parseExcelDateToTimestamp(invoice.date)
+
+    if (newDateVal > 0) {
+        let foundChronologicalSpot = false
+        for (let i = trueBottom; i >= 2; i--) { // skip header at 1
+            const row = sheet.getRow(i)
+            // Main sheet Date is column A (1). CF sheet Date is column C (3).
+            const dateCol = invoice.source === 'CF' ? 3 : 1
+
+            let sheetDateStr = ''
+            const cellValue = row.getCell(dateCol).value
+            if (cellValue instanceof Date) {
+                sheetDateStr = `${cellValue.getDate()}.${cellValue.getMonth() + 1}.${cellValue.getFullYear()}`
+            } else {
+                sheetDateStr = String(cellValue || '').trim()
+            }
+
+            const sheetDateVal = parseExcelDateToTimestamp(sheetDateStr)
+
+            if (sheetDateVal > 0) {
+                if (newDateVal >= sheetDateVal) {
+                    insertIndexRow = i + 1
+                    foundChronologicalSpot = true
+                    break
+                }
+            }
+        }
+        if (!foundChronologicalSpot && trueBottom >= 2) {
+            insertIndexRow = 2
+        }
+    }
+
+    const prevExcelRow = insertIndexRow - 1
+
+    let newRowData: any[] = []
+
+    if (invoice.source === 'CF') {
+        const parts = invoice.date.split('.')
+        let monthLabel = ''
+        if (parts.length >= 3) {
+            monthLabel = `${parseInt(parts[1])}.${parts[2].slice(-2)}`
+        }
+
+        const formulaObj = insertIndexRow > 2
+            ? { formula: `G${prevExcelRow}+E${insertIndexRow}-F${insertIndexRow}` }
+            : { formula: `E${insertIndexRow}-F${insertIndexRow}` }
+
+        newRowData = [
+            monthLabel,
+            invoice.projectNumber || '',
+            invoice.date,
+            invoice.description,
+            income,
+            outcome,
+            formulaObj,
+            invoice.driveFileLink || '',
+            invoice.shortDescription || ''
+        ]
+    } else {
+        const formulaObj = insertIndexRow > 2
+            ? { formula: `F${prevExcelRow}+D${insertIndexRow}-E${insertIndexRow}` }
+            : { formula: `D${insertIndexRow}-E${insertIndexRow}` }
+
+        newRowData = [
+            invoice.date,
+            invoice.projectNumber || '',
+            invoice.description,
+            income,
+            outcome,
+            formulaObj,
+            invoice.driveFileLink || '',
+            invoice.shortDescription || '',
+            ''
+        ]
+    }
+
+    // Splice perfectly preserves all surrounding formatting, colors, and relative formulas.
+    sheet.spliceRows(insertIndexRow, 0, newRowData)
+
+    const newBuffer = await workbook.xlsx.writeBuffer()
+
+    const stream = new Readable()
+    stream.push(Buffer.from(newBuffer))
+    stream.push(null)
+
+    await driveClient.files.update({
+        fileId: spreadsheetId,
+        media: {
+            mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            body: stream
+        },
+        supportsAllDrives: true
+    })
+}
+
+export async function removeInvoiceFromSheet(driveFileId: string) {
+    const spreadsheetId = await findFinanceSheetId()
+
+    if (!spreadsheetId) {
+        throw new Error('Could not find Merged_finance.xlsx in the shared Google Drive folder.')
+    }
+
+    const fileResponse = await driveClient.files.get(
+        { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+        { responseType: 'arraybuffer' }
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    await workbook.xlsx.load(fileResponse.data as ArrayBuffer)
+
+    const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`
+    let sheetModified = false
+
+    const tabsToCheck = [workbook.worksheets[0].name, 'CF']
+
+    for (const sheetName of tabsToCheck) {
+        const sheet = workbook.getWorksheet(sheetName)
+        if (!sheet) continue
+
+        let deletedRowIndex = -1
+
+        for (let i = sheet.rowCount; i >= 1; i--) {
+            const row = sheet.getRow(i)
+            // Main sheet URL is G (7), CF sheet URL is H (8)
+            const colG = String(row.getCell(7).value || '').trim()
+            const colH = String(row.getCell(8).value || '').trim()
+            if (colG === driveLink || colH === driveLink) {
+                deletedRowIndex = i
+                break
+            }
+        }
+
+        if (deletedRowIndex !== -1) {
+            sheet.spliceRows(deletedRowIndex, 1)
+            sheetModified = true
+            break
+        }
+    }
+
+    if (sheetModified) {
+        const newBuffer = await workbook.xlsx.writeBuffer()
+        const stream = new Readable()
+        stream.push(Buffer.from(newBuffer))
+        stream.push(null)
+
+        await driveClient.files.update({
+            fileId: spreadsheetId,
+            media: {
+                mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                body: stream
+            },
+            supportsAllDrives: true
+        })
     }
 }

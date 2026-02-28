@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { FinanceRow } from '@/lib/google-sheets'
-import { FolderKanban, Search, Link as LinkIcon, Split } from 'lucide-react'
+import { FolderKanban, Search, Link as LinkIcon, Split, Trash2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
 import { parseEuropeanNumber } from '@/components/CFCacheManager'
@@ -317,8 +317,32 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                                                 <td className="px-6 py-4 text-emerald-500 font-medium whitespace-nowrap">{tx.income || '-'}</td>
                                                 <td className="px-6 py-4 text-red-500 font-medium whitespace-nowrap">{tx.outcome || '-'}</td>
                                                 <td className="px-6 py-4 text-right">
-                                                    <div className="flex items-center justify-end gap-3 h-full">
+                                                    <div className="flex items-center justify-end gap-3 h-full" onClick={(e) => e.stopPropagation()}>
                                                         {tx.notes && <span className="text-xs text-muted-foreground bg-muted p-1.5 rounded-lg line-clamp-1 max-w-[150px]" title={tx.notes}>{tx.notes}</span>}
+                                                        {tx.transactionUrl && tx.id && tx.id.length < 64 && !tx.isSplit && (
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation()
+                                                                    if (confirm('Are you sure you want to delete this invoice? This will remove the document from Google Drive.')) {
+                                                                        fetch('/api/invoice/delete', {
+                                                                            method: 'POST',
+                                                                            headers: { 'Content-Type': 'application/json' },
+                                                                            body: JSON.stringify({ id: tx.id, transactionUrl: tx.transactionUrl })
+                                                                        }).then(res => res.json()).then(data => {
+                                                                            if (data.success) {
+                                                                                setCombinedData(prev => prev.filter(r => r.id !== tx.id))
+                                                                            } else {
+                                                                                alert(data.error || 'Failed to delete')
+                                                                            }
+                                                                        }).catch(() => alert('Failed to delete'))
+                                                                    }
+                                                                }}
+                                                                className="text-red-500 hover:text-red-400 bg-red-500/10 p-2 rounded-lg inline-flex transition-transform hover:scale-105"
+                                                                title="Delete Invoice"
+                                                            >
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </button>
+                                                        )}
                                                         {tx.transactionUrl && (
                                                             <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg inline-flex" title="View Transaction">
                                                                 <LinkIcon className="w-4 h-4" />

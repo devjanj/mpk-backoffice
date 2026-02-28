@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { FinanceRow } from '@/lib/google-sheets'
-import { FileText, Search, Link as LinkIcon, ChevronLeft, ChevronRight, ArrowUpDown, Split } from 'lucide-react'
+import { FileText, Search, Link as LinkIcon, ChevronLeft, ChevronRight, ArrowUpDown, Split, Trash2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { parseEuropeanNumber } from '@/components/CFCacheManager'
 import { TransactionSplitModal } from '@/components/TransactionSplitModal'
@@ -202,6 +202,31 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-3" onClick={(e) => e.stopPropagation()}>
                                                 {tx.notes && <span className="text-xs text-muted-foreground bg-muted p-1.5 rounded-lg max-w-[150px] truncate" title={tx.notes}>{tx.notes}</span>}
+                                                {/* If it has a transactionUrl, it's likely an uploaded file we can delete if it's from the DB */}
+                                                {tx.transactionUrl && tx.id && tx.id.length < 64 && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            if (confirm('Are you sure you want to delete this invoice? This will remove the document from Google Drive.')) {
+                                                                fetch('/api/invoice/delete', {
+                                                                    method: 'POST',
+                                                                    headers: { 'Content-Type': 'application/json' },
+                                                                    body: JSON.stringify({ id: tx.id, transactionUrl: tx.transactionUrl })
+                                                                }).then(res => res.json()).then(data => {
+                                                                    if (data.success) {
+                                                                        setCombinedData(prev => prev.filter(r => r.id !== tx.id))
+                                                                    } else {
+                                                                        alert(data.error || 'Failed to delete')
+                                                                    }
+                                                                }).catch(() => alert('Failed to delete'))
+                                                            }
+                                                        }}
+                                                        className="text-red-500 hover:text-red-400 bg-red-500/10 p-2 rounded-lg inline-flex transition-transform hover:scale-105"
+                                                        title="Delete Invoice"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                                 {tx.transactionUrl && (
                                                     <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 bg-primary/10 p-2 rounded-lg inline-flex transition-transform hover:scale-105" title="View Document">
                                                         <LinkIcon className="w-4 h-4" />
@@ -250,6 +275,6 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                 onClose={() => setIsModalOpen(false)}
                 onSave={fetchSplits}
             />
-        </div>
+        </div >
     )
 }
