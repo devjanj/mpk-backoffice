@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Plus, Trash2, Calendar, FileText, Pickaxe, Euro, LinkIcon, FolderKanban } from 'lucide-react'
+import { Plus, Trash2, Calendar, FileText, Pickaxe, Euro, LinkIcon, FolderKanban, Pencil } from 'lucide-react'
 import { AddEmployeeWorkModal } from './AddEmployeeWorkModal'
 import { useRouter } from 'next/navigation'
 
-interface EmployeeWork {
+export interface EmployeeWork {
     id: string
     employeeName: string
     date: Date
@@ -25,6 +25,7 @@ interface EmployeesDashboardProps {
 
 export function EmployeesDashboard({ initialData, existingProjectNumbers }: EmployeesDashboardProps) {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+    const [editingEntry, setEditingEntry] = useState<EmployeeWork | null>(null)
     const [data, setData] = useState<EmployeeWork[]>(initialData)
     const router = useRouter()
 
@@ -66,7 +67,10 @@ export function EmployeesDashboard({ initialData, existingProjectNumbers }: Empl
         <div className="space-y-8">
             <div className="flex justify-end">
                 <button
-                    onClick={() => setIsAddModalOpen(true)}
+                    onClick={() => {
+                        setEditingEntry(null)
+                        setIsAddModalOpen(true)
+                    }}
                     className="bg-primary text-primary-foreground px-6 py-2.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all shadow-md shadow-primary/20"
                 >
                     <Plus className="w-5 h-5" /> Add New Entry
@@ -115,13 +119,25 @@ export function EmployeesDashboard({ initialData, existingProjectNumbers }: Empl
                                                     <Calendar className="w-4 h-4 opacity-70" />
                                                     {formatDate(entry.date)}
                                                 </div>
-                                                <button
-                                                    onClick={() => handleDelete(entry.id, entry.driveFileLink)}
-                                                    className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-red-500 hover:bg-red-500/10 rounded-lg shrink-0"
-                                                    title="Delete Entry"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <button
+                                                        onClick={() => {
+                                                            setEditingEntry(entry)
+                                                            setIsAddModalOpen(true)
+                                                        }}
+                                                        className="p-2 text-primary hover:bg-primary/10 rounded-lg shrink-0"
+                                                        title="Edit Entry"
+                                                    >
+                                                        <Pencil className="w-4 h-4" />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(entry.id, entry.driveFileLink)}
+                                                        className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg shrink-0"
+                                                        title="Delete Entry"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                </div>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-y-3 mb-4 text-sm">
@@ -183,8 +199,12 @@ export function EmployeesDashboard({ initialData, existingProjectNumbers }: Empl
 
             <AddEmployeeWorkModal
                 isOpen={isAddModalOpen}
-                onClose={() => setIsAddModalOpen(false)}
+                onClose={() => {
+                    setIsAddModalOpen(false)
+                    setTimeout(() => setEditingEntry(null), 300) // Clear after modal out-animates
+                }}
                 existingProjectNumbers={existingProjectNumbers}
+                editData={editingEntry}
                 onSuccess={() => {
                     // Refresh is handled inside modal via router.refresh, but we could trigger refetch here if needed
                 }}

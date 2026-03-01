@@ -27,27 +27,27 @@ export async function POST(req: Request) {
         })
         console.log(`[Employee Work Delete] Removed Postgres footprint for: ${id}`)
 
-        // 3. Delete the physical image from Google Drive if it exists
+        // 3. Delete Physical Files from Google Drive iteratively
         if (workRecord.driveFileId) {
-            try {
-                await driveClient.files.delete({
-                    fileId: workRecord.driveFileId,
-                    supportsAllDrives: true
-                })
-                console.log(`[Employee Work Delete] Removed document from Google Drive: ${workRecord.driveFileId}`)
-            } catch (driveErr: any) {
-                console.warn(`[Employee Work Delete] Failed to delete from Google Drive (might already be deleted): ${driveErr.message}`)
+            const fileIds = workRecord.driveFileId.split(',')
+            for (const fId of fileIds) {
+                if (fId.trim()) {
+                    try {
+                        console.log(`[Employee Work Delete] Deleting physical file from Drive: ${fId}`)
+                        await driveClient.files.delete({ fileId: fId.trim(), supportsAllDrives: true })
+                    } catch (driveErr: any) {
+                        console.error("[Employee Work Delete] Failed to delete file or file already removed:", driveErr.message)
+                    }
+                }
             }
         }
 
-        // 4. Remove the row from Google Sheets Excel File
-        if (workRecord.driveFileLink) {
-            try {
-                await removeEmployeeWorkFromSheet(workRecord.driveFileLink)
-                console.log(`[Employee Work Delete] Removed row from Google Sheets Employees tab`)
-            } catch (sheetErr) {
-                console.error("[Employee Work Delete] Failed to remove row from Google Sheet:", sheetErr)
-            }
+        // 4. Remove the row from Google Sheets Excel File by its hidden Postgres ID
+        try {
+            await removeEmployeeWorkFromSheet(id)
+            console.log(`[Employee Work Delete] Removed row from Google Sheets Employees tab`)
+        } catch (sheetErr) {
+            console.error("[Employee Work Delete] Failed to remove row from Google Sheet:", sheetErr)
         }
 
         return NextResponse.json({ success: true })

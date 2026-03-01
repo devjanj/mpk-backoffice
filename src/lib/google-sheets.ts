@@ -703,6 +703,7 @@ export async function removeInvoiceFromSheet(driveFileId: string) {
 }
 
 export async function appendEmployeeWorkToSheet(work: {
+    id: string,
     employeeName: string,
     date: Date,
     hours: number,
@@ -729,11 +730,11 @@ export async function appendEmployeeWorkToSheet(work: {
     if (!sheet) {
         // Create it if the user deleted the empty tab
         sheet = workbook.addWorksheet('Employees')
-        sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA'])
+        sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA', 'SYSTEM_ID'])
     } else {
         // If sheet is fully empty, add headers
         if (sheet.rowCount === 0) {
-            sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA'])
+            sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA', 'SYSTEM_ID'])
         }
     }
 
@@ -752,6 +753,7 @@ export async function appendEmployeeWorkToSheet(work: {
     // G: Projekt
     // H: Opis
     // I: Slika
+    // J: SYSTEM_ID (Hidden Anchor)
     const newRow = sheet.addRow([
         dateStr,
         work.employeeName,
@@ -761,7 +763,8 @@ export async function appendEmployeeWorkToSheet(work: {
         totalPay,
         work.projectNumber || '-',
         work.description || '-',
-        work.driveFileLink || '-'
+        work.driveFileLink || '-',
+        work.id
     ])
 
     // Format numbers
@@ -787,8 +790,8 @@ export async function appendEmployeeWorkToSheet(work: {
     return { success: true }
 }
 
-export async function removeEmployeeWorkFromSheet(driveLink: string) {
-    if (!driveLink) return;
+export async function removeEmployeeWorkFromSheet(id: string) {
+    if (!id) return;
 
     const spreadsheetId = await findFinanceSheetId()
     if (!spreadsheetId) return;
@@ -806,12 +809,12 @@ export async function removeEmployeeWorkFromSheet(driveLink: string) {
 
     let deletedRowIndex = -1
 
-    // Scan backwards
+    // Scan backwards finding the ID in column J
     for (let i = sheet.rowCount; i >= 1; i--) {
         const row = sheet.getRow(i)
-        // Image URL is in Column I (9)
-        const colI = String(row.getCell(9).value || '').trim()
-        if (colI === driveLink) {
+        // Hidden ID is in Column J (10)
+        const colJ = String(row.getCell(10).value || '').trim()
+        if (colJ === id) {
             deletedRowIndex = i
             break
         }
@@ -834,4 +837,82 @@ export async function removeEmployeeWorkFromSheet(driveLink: string) {
             supportsAllDrives: true
         })
     }
+}
+
+export async function updateEmployeeWorkInSheet(id: string, work: {
+    employeeName: string,
+    date: Date,
+    hours: number,
+    payRate: number,
+    extraCosts: number,
+    projectNumber: string,
+    description: string,
+    driveFileLink: string | null
+}) {
+    if (!id) return { success: false, error: 'No ID provided' };
+
+    const spreadsheetId = await findFinanceSheetId()
+    if (!spreadsheetId) {
+        return { success: false, error: 'Could not find the Finance sheet.' }
+    }
+
+    const fileResponse = await driveClient.files.get(
+        { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+        { responseType: 'arraybuffer' }
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    await workbook.xlsx.load(fileResponse.data as ArrayBuffer)
+
+    const sheet = workbook.getWorksheet('Employees')
+    if (!sheet) return { success: false, error: 'Employees sheet not found' };
+
+    let targetRowIndex = -1
+
+    // Scan finding the ID in column J
+    for (let i = sheet.rowCount; i >= 1; i--) {
+        const row = sheet.getRow(i)
+        const colJ = String(row.getCell(10).value || '').trim()
+        if (colJ === id) {
+            targetRowIndex = i
+            break
+        }
+    }
+
+    if (targetRowIndex === -1) {
+        return { success: false, error: 'Row not found in Sheet' }
+    }
+
+    const targetRow = sheet.getRow(targetRowIndex)
+
+    const d = new Date(work.date);
+    const dateStr = `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
+    const totalPay = (work.hours * work.payRate) + work.extraCosts;
+
+    // Overwrite Cells Mapped 1->9 natively
+    targetRow.getCell(1).value = dateStr
+    targetRow.getCell(2).value = work.employeeName
+    targetRow.getCell(3).value = work.hours
+    targetRow.getCell(4).value = work.payRate
+    targetRow.getCell(5).value = work.extraCosts
+    targetRow.getCell(6).value = totalPay
+    targetRow.getCell(7).value = work.projectNumber || '-'
+    targetRow.getCell(8).value = work.description || '-'
+    targetRow.getCell(9).value = work.driveFileLink || '-'
+
+    const newBuffer = await workbook.xlsx.writeBuffer()
+    const stream = new Readable()
+    stream.push(Buffer.from(newBuffer))
+    stream.push(null)
+
+    await driveClient.files.update({
+        fileId: spreadsheetId,
+        media: {
+            mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            body: stream
+        },
+        supportsAllDrives: true
+    })
+
+    return { success: true }
 }

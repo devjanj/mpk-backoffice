@@ -2,17 +2,19 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, UploadCloud, XCircle, Loader2 } from 'lucide-react'
+import { X, UploadCloud, XCircle, Loader2, FileCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { EmployeeWork } from './EmployeesDashboard'
 
 interface AddEmployeeWorkModalProps {
     isOpen: boolean
     onClose: () => void
     existingProjectNumbers: string[]
+    editData?: EmployeeWork | null
     onSuccess?: () => void
 }
 
-export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, onSuccess }: AddEmployeeWorkModalProps) {
+export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, editData, onSuccess }: AddEmployeeWorkModalProps) {
     const [employeeName, setEmployeeName] = useState<'Žan' | 'Jan' | 'Marko'>('Žan')
     const [date, setDate] = useState<string>('')
     const [hours, setHours] = useState<string>('')
@@ -21,7 +23,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
     const [projectNum, setProjectNum] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
-    const [file, setFile] = useState<File | null>(null)
+    const [files, setFiles] = useState<File[]>([])
     const [isDragging, setIsDragging] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -29,21 +31,38 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
 
     useEffect(() => {
         if (isOpen) {
-            const today = new Date()
-            const yyyy = today.getFullYear()
-            const mm = String(today.getMonth() + 1).padStart(2, '0')
-            const dd = String(today.getDate()).padStart(2, '0')
-            setDate(`${yyyy}-${mm}-${dd}`)
+            if (editData) {
+                // Hydrate Edit Form
+                setEmployeeName(editData.employeeName as 'Žan' | 'Jan' | 'Marko')
+                const d = new Date(editData.date)
+                const yyyy = d.getFullYear()
+                const mm = String(d.getMonth() + 1).padStart(2, '0')
+                const dd = String(d.getDate()).padStart(2, '0')
+                setDate(`${yyyy}-${mm}-${dd}`)
 
-            // Set default pay rates based on user maybe? Or leave blank
-            setHours('')
-            setPayRate('15') // Example default
-            setExtraCosts('')
-            setProjectNum('')
-            setDescription('')
-            setFile(null)
+                setHours(editData.hours.toString())
+                setPayRate(editData.payRate.toString())
+                setExtraCosts(editData.extraCosts ? editData.extraCosts.toString() : '')
+                setProjectNum(editData.projectNumber || '')
+                setDescription(editData.description || '')
+                setFiles([])
+            } else {
+                // Clear Create Form
+                const today = new Date()
+                const yyyy = today.getFullYear()
+                const mm = String(today.getMonth() + 1).padStart(2, '0')
+                const dd = String(today.getDate()).padStart(2, '0')
+                setDate(`${yyyy}-${mm}-${dd}`)
+
+                setHours('')
+                setPayRate('15')
+                setExtraCosts('')
+                setProjectNum('')
+                setDescription('')
+                setFiles([])
+            }
         }
-    }, [isOpen])
+    }, [isOpen, editData])
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()
@@ -58,7 +77,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
         e.preventDefault()
         setIsDragging(false)
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            setFile(e.dataTransfer.files[0])
+            setFiles(prev => [...prev, ...Array.from(e.dataTransfer.files)])
         }
     }
 
@@ -75,6 +94,9 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
             const formattedDate = `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`
 
             const formData = new FormData()
+            if (editData?.id) {
+                formData.append('id', editData.id)
+            }
             formData.append('employeeName', employeeName)
             formData.append('date', formattedDate)
             formData.append('hours', hours) // Keep as string for backend parsing
@@ -82,9 +104,9 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
             formData.append('extraCosts', extraCosts || '0') // Send as string
             formData.append('projectNumber', projectNum)
             formData.append('description', description)
-            if (file) {
-                formData.append('file', file)
-            }
+            files.forEach(f => {
+                formData.append('file', f)
+            })
 
             const res = await fetch('/api/employees/work', {
                 method: 'POST',
@@ -127,7 +149,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                         >
                             <div className="flex justify-between items-center p-6 border-b border-border/50">
                                 <h2 className="text-xl font-bold flex items-center gap-2">
-                                    Track Employee Work
+                                    {editData ? 'Edit Employee Work' : 'Track Employee Work'}
                                 </h2>
                                 <button onClick={onClose} className="p-2 hover:bg-muted rounded-full transition-colors">
                                     <X className="w-5 h-5 text-muted-foreground" />
@@ -229,42 +251,64 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                     <input
                                         type="file"
                                         ref={fileInputRef}
-                                        onChange={(e) => e.target.files && setFile(e.target.files[0])}
+                                        onChange={(e) => {
+                                            if (e.target.files) {
+                                                setFiles(prev => [...prev, ...Array.from(e.target.files!)])
+                                            }
+                                        }}
                                         className="hidden"
+                                        multiple
                                         accept="image/*,application/pdf,video/*"
                                     />
 
-                                    {!file ? (
+                                    <div className="space-y-3">
                                         <div
                                             onDragOver={handleDragOver}
                                             onDragLeave={handleDragLeave}
                                             onDrop={handleDrop}
                                             onClick={() => fileInputRef.current?.click()}
-                                            className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors ${isDragging ? 'border-primary bg-primary/5' : 'border-border/60 bg-muted/30 hover:bg-muted/50'}`}
+                                            className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors relative overflow-hidden ${isDragging ? 'border-primary bg-primary/5' : 'border-border/60 bg-muted/30 hover:bg-muted/50'}`}
                                         >
                                             <UploadCloud className={`w-10 h-10 mb-3 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
                                             <p className="text-sm font-medium mb-1">Click to upload or drag and drop</p>
                                             <p className="text-xs text-muted-foreground text-center">Images, PDFs, or Videos matching the day's work.</p>
+
+                                            {editData?.driveFileLink && files.length === 0 && (
+                                                <div className="mt-4 flex flex-col items-center">
+                                                    <div className="flex justify-center items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded-lg text-xs font-semibold mb-2">
+                                                        <FileCheck className="w-3.5 h-3.5" />
+                                                        Current Proof Attached
+                                                    </div>
+                                                    <p className="text-[10px] text-muted-foreground/60 text-center">Uploading new files will replace the existing attachments.</p>
+                                                </div>
+                                            )}
+
                                             <p className="text-[10px] text-muted-foreground/50 mt-4 uppercase tracking-widest font-semibold flex items-center gap-1">
                                                 Saving to Drive: Employees
                                             </p>
                                         </div>
-                                    ) : (
-                                        <div className="bg-muted border border-border/50 rounded-2xl p-4 flex items-center justify-between">
-                                            <div className="flex items-center gap-3 overflow-hidden">
-                                                <div className="w-10 h-10 bg-background rounded-lg border border-border/50 flex items-center justify-center shrink-0">
-                                                    <span className="text-xs font-bold text-muted-foreground">{file.name.split('.').pop()?.toUpperCase()}</span>
-                                                </div>
-                                                <div className="truncate">
-                                                    <p className="text-sm font-medium truncate">{file.name}</p>
-                                                    <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-                                                </div>
+
+                                        {files.length > 0 && (
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                                {files.map((f, i) => (
+                                                    <div key={i} className="bg-muted border border-border/50 rounded-xl p-3 flex items-center justify-between">
+                                                        <div className="flex items-center gap-3 overflow-hidden">
+                                                            <div className="w-8 h-8 bg-background rounded-lg border border-border/50 flex items-center justify-center shrink-0">
+                                                                <span className="text-[10px] font-bold text-muted-foreground">{f.name.split('.').pop()?.substring(0, 4).toUpperCase()}</span>
+                                                            </div>
+                                                            <div className="truncate">
+                                                                <p className="text-xs font-medium truncate">{f.name}</p>
+                                                                <p className="text-[10px] text-muted-foreground">{(f.size / 1024 / 1024).toFixed(2)} MB</p>
+                                                            </div>
+                                                        </div>
+                                                        <button onClick={() => setFiles(prev => prev.filter((_, idx) => idx !== i))} className="p-1.5 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors group">
+                                                            <XCircle className="w-4 h-4 opacity-50 group-hover:opacity-100" />
+                                                        </button>
+                                                    </div>
+                                                ))}
                                             </div>
-                                            <button onClick={() => setFile(null)} className="p-2 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors group">
-                                                <XCircle className="w-5 h-5 opacity-50 group-hover:opacity-100" />
-                                            </button>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="flex justify-end gap-3 pt-6 border-t border-border/50">
@@ -281,9 +325,9 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                         className="px-6 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                                     >
                                         {isSaving ? (
-                                            <><Loader2 className="w-4 h-4 animate-spin" /> Saving Entry...</>
+                                            <><Loader2 className="w-4 h-4 animate-spin" /> {editData ? 'Updating...' : 'Saving Entry...'}</>
                                         ) : (
-                                            'Save to Database & Sheet'
+                                            editData ? 'Update Entry' : 'Save to Database & Sheet'
                                         )}
                                     </button>
                                 </div>
