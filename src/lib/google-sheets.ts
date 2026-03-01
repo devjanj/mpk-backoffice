@@ -701,3 +701,137 @@ export async function removeInvoiceFromSheet(driveFileId: string) {
         })
     }
 }
+
+export async function appendEmployeeWorkToSheet(work: {
+    employeeName: string,
+    date: Date,
+    hours: number,
+    payRate: number,
+    extraCosts: number,
+    projectNumber: string,
+    description: string,
+    driveFileLink: string | null
+}) {
+    const spreadsheetId = await findFinanceSheetId()
+    if (!spreadsheetId) {
+        return { success: false, error: 'Could not find the Finance sheet.' }
+    }
+
+    const fileResponse = await driveClient.files.get(
+        { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+        { responseType: 'arraybuffer' }
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    await workbook.xlsx.load(fileResponse.data as ArrayBuffer)
+
+    let sheet = workbook.getWorksheet('Employees')
+    if (!sheet) {
+        // Create it if the user deleted the empty tab
+        sheet = workbook.addWorksheet('Employees')
+        sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA'])
+    } else {
+        // If sheet is fully empty, add headers
+        if (sheet.rowCount === 0) {
+            sheet.addRow(['DATUM', 'IME', 'URE', 'URNA POSTAVKA', 'DODATNI STROŠKI', 'SKUPAJ', 'PROJEKT', 'OPIS', 'SLIKA'])
+        }
+    }
+
+    // Format the date
+    const d = new Date(work.date);
+    const dateStr = `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
+
+    const totalPay = (work.hours * work.payRate) + work.extraCosts;
+
+    // A: Datum
+    // B: Ime
+    // C: Ure
+    // D: Urna postavka
+    // E: Dodatni stroški
+    // F: Skupaj
+    // G: Projekt
+    // H: Opis
+    // I: Slika
+    const newRow = sheet.addRow([
+        dateStr,
+        work.employeeName,
+        work.hours,
+        work.payRate,
+        work.extraCosts,
+        totalPay,
+        work.projectNumber || '-',
+        work.description || '-',
+        work.driveFileLink || '-'
+    ])
+
+    // Format numbers
+    newRow.getCell(3).numFmt = '0.00' // Hours
+    newRow.getCell(4).numFmt = '€ #,##0.00' // Rate
+    newRow.getCell(5).numFmt = '€ #,##0.00' // Extra Costs
+    newRow.getCell(6).numFmt = '€ #,##0.00' // Total
+
+    const newBuffer = await workbook.xlsx.writeBuffer()
+    const stream = new Readable()
+    stream.push(Buffer.from(newBuffer))
+    stream.push(null)
+
+    await driveClient.files.update({
+        fileId: spreadsheetId,
+        media: {
+            mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            body: stream
+        },
+        supportsAllDrives: true
+    })
+
+    return { success: true }
+}
+
+export async function removeEmployeeWorkFromSheet(driveLink: string) {
+    if (!driveLink) return;
+
+    const spreadsheetId = await findFinanceSheetId()
+    if (!spreadsheetId) return;
+
+    const fileResponse = await driveClient.files.get(
+        { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+        { responseType: 'arraybuffer' }
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    await workbook.xlsx.load(fileResponse.data as ArrayBuffer)
+
+    const sheet = workbook.getWorksheet('Employees')
+    if (!sheet) return;
+
+    let deletedRowIndex = -1
+
+    // Scan backwards
+    for (let i = sheet.rowCount; i >= 1; i--) {
+        const row = sheet.getRow(i)
+        // Image URL is in Column I (9)
+        const colI = String(row.getCell(9).value || '').trim()
+        if (colI === driveLink) {
+            deletedRowIndex = i
+            break
+        }
+    }
+
+    if (deletedRowIndex !== -1) {
+        sheet.spliceRows(deletedRowIndex, 1)
+
+        const newBuffer = await workbook.xlsx.writeBuffer()
+        const stream = new Readable()
+        stream.push(Buffer.from(newBuffer))
+        stream.push(null)
+
+        await driveClient.files.update({
+            fileId: spreadsheetId,
+            media: {
+                mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                body: stream
+            },
+            supportsAllDrives: true
+        })
+    }
+}

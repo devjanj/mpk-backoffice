@@ -1,0 +1,35 @@
+import { google } from 'googleapis';
+import fs from 'fs';
+import * as xlsx from 'xlsx';
+
+let customPrivateKey = '';
+const envContent = fs.readFileSync('.env.local', 'utf-8');
+const matchKey = envContent.match(/GOOGLE_PRIVATE_KEY="([\s\S]*?)"/);
+if (matchKey) customPrivateKey = matchKey[1];
+const matchEmail = envContent.match(/GOOGLE_CLIENT_EMAIL="([\s\S]*?)"/);
+const clientEmail = matchEmail ? matchEmail[1] : '';
+const matchSheet = envContent.match(/GOOGLE_SHEET_ID="([\s\S]*?)"/);
+const spreadsheetId = matchSheet ? matchSheet[1] : '';
+
+customPrivateKey = customPrivateKey.replace(/\\n/g, '\n');
+
+const auth = new google.auth.GoogleAuth({
+    credentials: { client_email: clientEmail, private_key: customPrivateKey },
+    scopes: ['https://www.googleapis.com/auth/drive'],
+});
+const driveClient = google.drive({ version: 'v3', auth });
+
+async function listTabs() {
+    try {
+        const fileResponse = await driveClient.files.get(
+            { fileId: spreadsheetId, alt: 'media', supportsAllDrives: true },
+            { responseType: 'arraybuffer' }
+        );
+        const workbook = xlsx.read(Buffer.from(fileResponse.data), { type: 'buffer' });
+        console.log("Sheet names:");
+        workbook.SheetNames.forEach(n => console.log(n));
+    } catch (e) {
+        console.error("Error:", e);
+    }
+}
+listTabs();

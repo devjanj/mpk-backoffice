@@ -1,6 +1,6 @@
 'use client'
 
-import { BarChart3, Euro, FolderKanban, LogOut, FileText, Wallet } from 'lucide-react'
+import { BarChart3, Euro, FolderKanban, LogOut, FileText, Wallet, Users } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
@@ -29,6 +29,7 @@ export function Sidebar() {
                 <nav className="space-y-2">
                     <SidebarItem icon={<BarChart3 />} label="Overview" href="/" active={pathname === '/'} />
                     <SidebarItem icon={<FolderKanban />} label="Projects" href="/projects" active={pathname === '/projects'} />
+                    <SidebarItem icon={<Users />} label="Employees" href="/employees" active={pathname === '/employees'} />
                     <SidebarItem icon={<FileText />} label="Invoices (Bank + CF)" href="/invoices" active={pathname === '/invoices'} />
                     <SidebarItem icon={<Wallet />} label="Earnings (CF)" href="/earnings/cf" active={pathname === '/earnings/cf'} />
                     <SidebarItem icon={<Euro />} label="Earnings (Bank)" href="/earnings/bank" active={pathname === '/earnings/bank'} />

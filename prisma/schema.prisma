@@ -45,3 +45,21 @@ model ProjectStatus {
   status          String   @default("ACTIVE") // ACTIVE, FINISHED
   updatedAt       DateTime @updatedAt
 }
+
+model EmployeeWork {
+  id             String   @id @default(cuid())
+  employeeName   String   // "Žan", "Jan", or "Marko"
+  date           DateTime
+  hours          Float
+  payRate        Float
+  extraCosts     Float?
+  projectNumber  String?
+  description    String?
+
+  // File details
+  driveFileId    String?
+  driveFileLink  String?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
