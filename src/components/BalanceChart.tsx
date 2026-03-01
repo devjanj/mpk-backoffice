@@ -17,8 +17,11 @@ type HistoricalBalance = {
     balance: number;
 }
 
+type TimeRange = '3M' | '6M' | '1Y' | 'ALL';
+
 export function BalanceChart({ data, augmentWithCF = false }: { data: HistoricalBalance[], augmentWithCF?: boolean }) {
     const [chartData, setChartData] = useState<HistoricalBalance[]>(data)
+    const [timeRange, setTimeRange] = useState<TimeRange>('6M')
 
     useEffect(() => {
         setChartData(data)
@@ -128,20 +131,52 @@ export function BalanceChart({ data, augmentWithCF = false }: { data: Historical
         return null
     }
 
+    // Derive filtered data based on selected time range
+    const getDisplayedData = () => {
+        if (!chartData) return []
+        switch (timeRange) {
+            case '3M': return chartData.slice(-3)
+            case '6M': return chartData.slice(-6)
+            case '1Y': return chartData.slice(-12)
+            case 'ALL': return chartData
+            default: return chartData.slice(-6)
+        }
+    }
+
+    const displayedData = getDisplayedData()
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-card border border-border/50 rounded-3xl p-6 shadow-sm mb-10"
         >
-            <div className="mb-6">
-                <h3 className="font-semibold text-lg text-foreground">Balance History</h3>
-                <p className="text-sm text-muted-foreground">Ending balance for the last 6 active months.</p>
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h3 className="font-semibold text-lg text-foreground">Balance History</h3>
+                    <p className="text-sm text-muted-foreground">Ending balance trending over time.</p>
+                </div>
+
+                {/* Time Range Filter Toggle */}
+                <div className="flex bg-muted/50 p-1 rounded-xl border border-border/50 w-fit">
+                    {(['3M', '6M', '1Y', 'ALL'] as TimeRange[]).map((range) => (
+                        <button
+                            key={range}
+                            onClick={() => setTimeRange(range)}
+                            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${timeRange === range
+                                    ? 'bg-background shadow-sm text-primary'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            {range}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <AreaChart data={displayedData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <defs>
                             <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
                                 {/* Fallback colors just in case CSS vars fail inside SVG gradient, but Tailwind primary usually is available */}

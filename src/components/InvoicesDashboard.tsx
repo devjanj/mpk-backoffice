@@ -156,7 +156,8 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                                 <th className="px-6 py-4 font-medium cursor-pointer hover:text-foreground transition-colors group" onClick={() => requestSort('outcome')}>
                                     <div className="flex items-center gap-2">Outcome <ArrowUpDown className={`w-3 h-3 ${sortConfig.key === 'outcome' ? 'text-primary' : 'opacity-30 group-hover:opacity-100'} transition-all`} /></div>
                                 </th>
-                                <th className="px-6 py-4 font-medium text-right">Notes / Link</th>
+                                <th className="px-6 py-4 font-medium">Note</th>
+                                <th className="px-6 py-4 font-medium text-right">Invoice URL</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-border/50">
@@ -199,9 +200,9 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                                         <td className="px-6 py-4 text-foreground font-medium max-w-[300px] truncate" title={tx.description}>{tx.description}</td>
                                         <td className="px-6 py-4 text-emerald-500 font-medium whitespace-nowrap">{tx.income || '-'}</td>
                                         <td className="px-6 py-4 text-red-500 font-medium whitespace-nowrap">{tx.outcome || '-'}</td>
+                                        <td className="px-6 py-4 max-w-[150px] truncate" title={tx.notes}>{tx.notes || '-'}</td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-3" onClick={(e) => e.stopPropagation()}>
-                                                {tx.notes && <span className="text-xs text-muted-foreground bg-muted p-1.5 rounded-lg max-w-[150px] truncate" title={tx.notes}>{tx.notes}</span>}
                                                 {/* If it has a transactionUrl, it's likely an uploaded file we can delete if it's from the DB */}
                                                 {tx.transactionUrl && tx.id && tx.id.length < 64 && (
                                                     <button
@@ -227,11 +228,11 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 )}
-                                                {tx.transactionUrl && (
-                                                    <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 bg-primary/10 p-2 rounded-lg inline-flex transition-transform hover:scale-105" title="View Document">
-                                                        <LinkIcon className="w-4 h-4" />
+                                                {tx.transactionUrl ? (
+                                                    <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 bg-primary/10 p-2 rounded-lg inline-flex transition-transform flex items-center gap-1 hover:scale-105" title="View Document">
+                                                        Link <LinkIcon className="w-3 h-3" />
                                                     </a>
-                                                )}
+                                                ) : '-'}
                                             </div>
                                         </td>
                                     </motion.tr>
@@ -239,7 +240,7 @@ export function InvoicesDashboard({ initialData }: { initialData: FinanceRow[] }
                             </AnimatePresence>
                             {currentData.length === 0 && (
                                 <tr>
-                                    <td colSpan={6} className="text-center py-12 text-muted-foreground">No transactions found matching your criteria.</td>
+                                    <td colSpan={7} className="text-center py-12 text-muted-foreground">No transactions found matching your criteria.</td>
                                 </tr>
                             )}
                         </tbody>

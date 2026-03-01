@@ -290,7 +290,8 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                                             <th className="px-6 py-4 font-medium min-w-[200px]">Description</th>
                                             <th className="px-6 py-4 font-medium">Cash In</th>
                                             <th className="px-6 py-4 font-medium">Cash Out</th>
-                                            <th className="px-6 py-4 font-medium text-right">Link / Note</th>
+                                            <th className="px-6 py-4 font-medium">Note</th>
+                                            <th className="px-6 py-4 font-medium text-right">Invoice URL</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-border/50">
@@ -316,9 +317,9 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                                                 </td>
                                                 <td className="px-6 py-4 text-emerald-500 font-medium whitespace-nowrap">{tx.income || '-'}</td>
                                                 <td className="px-6 py-4 text-red-500 font-medium whitespace-nowrap">{tx.outcome || '-'}</td>
+                                                <td className="px-6 py-4 max-w-[150px] truncate" title={tx.notes}>{tx.notes || '-'}</td>
                                                 <td className="px-6 py-4 text-right">
                                                     <div className="flex items-center justify-end gap-3 h-full" onClick={(e) => e.stopPropagation()}>
-                                                        {tx.notes && <span className="text-xs text-muted-foreground bg-muted p-1.5 rounded-lg line-clamp-1 max-w-[150px]" title={tx.notes}>{tx.notes}</span>}
                                                         {tx.transactionUrl && tx.id && tx.id.length < 64 && !tx.isSplit && (
                                                             <button
                                                                 onClick={(e) => {
@@ -343,11 +344,11 @@ export function ProjectsDashboard({ initialData }: { initialData: FinanceRow[] }
                                                                 <Trash2 className="w-4 h-4" />
                                                             </button>
                                                         )}
-                                                        {tx.transactionUrl && (
-                                                            <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg inline-flex" title="View Transaction">
-                                                                <LinkIcon className="w-4 h-4" />
+                                                        {tx.transactionUrl ? (
+                                                            <a href={tx.transactionUrl} target="_blank" rel="noreferrer" className="text-primary hover:text-primary/80 transition-colors bg-primary/10 p-2 rounded-lg inline-flex flex items-center gap-1 hover:scale-105" title="View Transaction">
+                                                                Link <LinkIcon className="w-3 h-3" />
                                                             </a>
-                                                        )}
+                                                        ) : '-'}
                                                     </div>
                                                 </td>
                                             </tr>

@@ -233,13 +233,10 @@ export async function getFinanceDashboardMetrics() {
         }
     })
 
-    // Grab the last 6 months chronologically
+    // We now send ALL months to the frontend to allow dynamic 3M, 6M, 1Y, ALL filtering
     const allMonths = Object.keys(monthlyBalances)
-    // Since sheet is chronologically ordered top to bottom, the array keys are naturally in chronological order.
-    // We slice the last 6
-    const last6Months = allMonths.slice(-6)
 
-    const historicalBalances = last6Months.map(month => ({
+    const historicalBalances = allMonths.map(month => ({
         month: formatMonthLabel(month),
         balance: monthlyBalances[month]
     }))
@@ -478,9 +475,8 @@ export async function getCFDashboardMetrics() {
     })
 
     const allMonths = Object.keys(monthlyBalances)
-    const last6Months = allMonths.slice(-6)
 
-    const historicalBalances = last6Months.map(month => ({
+    const historicalBalances = allMonths.map(month => ({
         month: formatMonthLabel(month),
         balance: monthlyBalances[month]
     }))
