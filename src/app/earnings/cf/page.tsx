@@ -30,11 +30,11 @@ export default async function CFEarningsPage() {
     const isPositiveTrend = (metrics?.percentageChange || 0) >= 0;
 
     return (
-        <div className="min-h-screen bg-background text-foreground flex">
+        <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
             <Sidebar />
 
             {/* Main Content */}
-            <main className="flex-1 p-8 overflow-y-auto">
+            <main className="flex-1 p-4 md:p-8 overflow-y-auto">
                 <CFCacheManager currentBalanceStr={currentBalance} historyData={metrics?.historicalBalances || []} allData={metrics?.allRawData || []} />
 
                 <header className="mb-10 flex justify-between items-end">

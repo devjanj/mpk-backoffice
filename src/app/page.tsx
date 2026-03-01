@@ -32,11 +32,11 @@ export default async function DashboardPage() {
   const isPositiveTrend = (metrics?.percentageChange || 0) >= 0;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
+    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
         <header className="mb-10 flex justify-between items-end">
           <div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome back, Majster</h1>

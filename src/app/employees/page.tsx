@@ -19,10 +19,10 @@ export default async function EmployeesPage() {
     const existingProjectNumbers = projects.map(p => p.projectNumber)
 
     return (
-        <div className="min-h-screen bg-background text-foreground flex">
+        <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
             <Sidebar />
 
-            <main className="flex-1 p-8 overflow-y-auto">
+            <main className="flex-1 p-4 md:p-8 overflow-y-auto">
                 <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                     <div>
                         <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
