@@ -15,9 +15,9 @@ interface AddEmployeeWorkModalProps {
 export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, onSuccess }: AddEmployeeWorkModalProps) {
     const [employeeName, setEmployeeName] = useState<'Žan' | 'Jan' | 'Marko'>('Žan')
     const [date, setDate] = useState<string>('')
-    const [hours, setHours] = useState<number | ''>('')
-    const [payRate, setPayRate] = useState<number | ''>('')
-    const [extraCosts, setExtraCosts] = useState<number | ''>('')
+    const [hours, setHours] = useState<string>('')
+    const [payRate, setPayRate] = useState<string>('')
+    const [extraCosts, setExtraCosts] = useState<string>('')
     const [projectNum, setProjectNum] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
@@ -37,7 +37,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
 
             // Set default pay rates based on user maybe? Or leave blank
             setHours('')
-            setPayRate(15) // Example default
+            setPayRate('15') // Example default
             setExtraCosts('')
             setProjectNum('')
             setDescription('')
@@ -77,9 +77,9 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
             const formData = new FormData()
             formData.append('employeeName', employeeName)
             formData.append('date', formattedDate)
-            formData.append('hours', hours.toString())
-            formData.append('payRate', payRate.toString())
-            formData.append('extraCosts', (extraCosts || 0).toString())
+            formData.append('hours', hours) // Keep as string for backend parsing
+            formData.append('payRate', payRate) // Send as string to support commas
+            formData.append('extraCosts', extraCosts || '0') // Send as string
             formData.append('projectNumber', projectNum)
             formData.append('description', description)
             if (file) {
@@ -166,29 +166,29 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider flex items-center gap-1">Hours <span className="text-red-500">*</span></label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             value={hours}
-                                            onChange={(e) => setHours(parseFloat(e.target.value))}
-                                            placeholder="e.g. 8"
+                                            onChange={(e) => setHours(e.target.value)}
+                                            placeholder="e.g. 8.5 or 8,5"
                                             className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50"
                                         />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider flex items-center gap-1">Pay Rate (€/h) <span className="text-red-500">*</span></label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             value={payRate}
-                                            onChange={(e) => setPayRate(parseFloat(e.target.value))}
-                                            step="0.5"
+                                            onChange={(e) => setPayRate(e.target.value)}
+                                            placeholder="e.g. 15,00"
                                             className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50"
                                         />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">Extra Costs (€)</label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             value={extraCosts}
-                                            onChange={(e) => setExtraCosts(parseFloat(e.target.value))}
+                                            onChange={(e) => setExtraCosts(e.target.value)}
                                             placeholder="e.g. 15.50"
                                             className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50"
                                         />
@@ -231,7 +231,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                         ref={fileInputRef}
                                         onChange={(e) => e.target.files && setFile(e.target.files[0])}
                                         className="hidden"
-                                        accept="image/*,application/pdf"
+                                        accept="image/*,application/pdf,video/*"
                                     />
 
                                     {!file ? (
@@ -244,7 +244,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                         >
                                             <UploadCloud className={`w-10 h-10 mb-3 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
                                             <p className="text-sm font-medium mb-1">Click to upload or drag and drop</p>
-                                            <p className="text-xs text-muted-foreground text-center">Images or PDFs matching the day's work.</p>
+                                            <p className="text-xs text-muted-foreground text-center">Images, PDFs, or Videos matching the day's work.</p>
                                             <p className="text-[10px] text-muted-foreground/50 mt-4 uppercase tracking-widest font-semibold flex items-center gap-1">
                                                 Saving to Drive: Employees
                                             </p>

@@ -3,21 +3,26 @@ import prisma from '@/lib/prisma'
 import { driveClient } from '@/lib/google'
 import { appendEmployeeWorkToSheet } from '@/lib/google-sheets'
 import { Readable } from 'stream'
+import { parseEuropeanNumberHelper } from '@/lib/xml-parser'
 
 export async function POST(req: Request) {
     try {
         const formData = await req.formData()
         const employeeName = formData.get('employeeName') as string
         const date = formData.get('date') as string
-        const hours = parseFloat(formData.get('hours') as string) || 0
-        const payRate = parseFloat(formData.get('payRate') as string) || 0
-        const extraCosts = parseFloat(formData.get('extraCosts') as string) || 0
+        const rawHours = formData.get('hours') as string
+        const rawPayRate = formData.get('payRate') as string
+        const rawExtraCosts = formData.get('extraCosts') as string
         const projectNumber = formData.get('projectNumber') as string
         const description = formData.get('description') as string
         const file = formData.get('file') as File | null
 
+        const hours = parseEuropeanNumberHelper(rawHours) || 0
+        const payRate = parseEuropeanNumberHelper(rawPayRate) || 0
+        const extraCosts = parseEuropeanNumberHelper(rawExtraCosts) || 0
+
         if (!employeeName || !date || hours <= 0 || payRate <= 0) {
-            return NextResponse.json({ error: 'Missing required employee work fields' }, { status: 400 })
+            return NextResponse.json({ error: 'Missing required employee work fields. Hours and PayRate must be greater than 0.' }, { status: 400 })
         }
 
         let driveFileId = null
@@ -32,17 +37,60 @@ export async function POST(req: Request) {
             stream.push(buffer)
             stream.push(null)
 
-            const driveFolderId = '1NJ37mPhzviW9CUtggSJOovPP2Dgz2JOX' // Specifically provided by user
+            const parentDriveFolderId = '1NJ37mPhzviW9CUtggSJOovPP2Dgz2JOX' // Employees root
 
-            console.log(`[Employee Work Save] Uploading ${file.name} to Employees Drive folder...`)
+            // Reformat DD.MM.YYYY to D-M-YYYY for the folder name
+            const dParts = date.split('.')
+            const safeDateFolder = dParts.length === 3 ? `${parseInt(dParts[0])}-${parseInt(dParts[1])}-${dParts[2]}` : date.replace(/\./g, '-')
+            const targetFolderName = `${employeeName}-${safeDateFolder}`
+
+            console.log(`[Employee Work Save] Searching for subfolder: ${targetFolderName}`)
+
+            // 1a. Search for existing subfolder
+            const searchRes = await driveClient.files.list({
+                q: `mimeType='application/vnd.google-apps.folder' and name='${targetFolderName}' and '${parentDriveFolderId}' in parents and trashed=false`,
+                fields: 'files(id, name)',
+                supportsAllDrives: true,
+                includeItemsFromAllDrives: true,
+            })
+
+            let uploadFolderId = searchRes.data.files && searchRes.data.files.length > 0
+                ? searchRes.data.files[0].id
+                : null
+
+            // 1b. Create subfolder if it doesn't exist
+            if (!uploadFolderId) {
+                console.log(`[Employee Work Save] Subfolder not found. Creating: ${targetFolderName}`)
+                const folderCreateRes = await driveClient.files.create({
+                    requestBody: {
+                        name: targetFolderName,
+                        mimeType: 'application/vnd.google-apps.folder',
+                        parents: [parentDriveFolderId]
+                    },
+                    fields: 'id',
+                    supportsAllDrives: true
+                })
+                uploadFolderId = folderCreateRes.data.id
+
+                // Set folder as highly visible immediately
+                if (uploadFolderId) {
+                    await driveClient.permissions.create({
+                        fileId: uploadFolderId,
+                        requestBody: { role: 'reader', type: 'anyone' },
+                        supportsAllDrives: true
+                    })
+                }
+            }
+
+            console.log(`[Employee Work Save] Uploading ${file.name} to ${targetFolderName} (${uploadFolderId})...`)
 
             const uploadedFile = await driveClient.files.create({
                 requestBody: {
                     name: `EMP_${employeeName}_${date}_${projectNumber || 'NoProj'}_${file.name}`,
-                    parents: [driveFolderId],
+                    parents: [uploadFolderId!],
                 },
                 media: {
-                    mimeType: file.type,
+                    mimeType: file.type || 'application/octet-stream',
                     body: stream
                 },
                 fields: 'id, webViewLink',
