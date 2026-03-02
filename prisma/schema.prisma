@@ -53,8 +53,13 @@ model EmployeeWork {
   hours          Float
   payRate        Float
   extraCosts     Float?
+  
+  // Legacy or simplified tracking
   projectNumber  String?
   description    String?
+
+  // Relational structure for multi-project splits (Phase 13)
+  allocations    EmployeeWorkAllocation[]
 
   // File details
   driveFileId    String?
@@ -62,4 +67,15 @@ model EmployeeWork {
 
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model EmployeeWorkAllocation {
+  id              String       @id @default(cuid())
+  employeeWorkId  String
+  projectNumber   String
+  hours           Float
+
+  employeeWork    EmployeeWork @relation(fields: [employeeWorkId], references: [id], onDelete: Cascade)
+
+  @@index([employeeWorkId])
 }

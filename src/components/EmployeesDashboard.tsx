@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Plus, Trash2, Calendar, FileText, Pickaxe, Euro, LinkIcon, FolderKanban, Pencil } from 'lucide-react'
 import { AddEmployeeWorkModal } from './AddEmployeeWorkModal'
+import { EmployeeAnalytics } from './EmployeeAnalytics'
 import { useRouter } from 'next/navigation'
 
 export interface EmployeeWork {
@@ -16,6 +17,7 @@ export interface EmployeeWork {
     description: string | null
     driveFileId: string | null
     driveFileLink: string | null
+    allocations: { id: string, projectNumber: string, hours: number }[]
 }
 
 interface EmployeesDashboardProps {
@@ -159,12 +161,17 @@ export function EmployeesDashboard({ initialData, existingProjectNumbers }: Empl
                                                 </div>
                                             </div>
 
-                                            {(entry.projectNumber || entry.description) && (
+                                            {(entry.allocations?.length > 0 || entry.description) && (
                                                 <div className="pt-3 border-t border-border/50 text-sm space-y-2 mb-3">
-                                                    {entry.projectNumber && (
-                                                        <div className="flex items-center gap-2 text-muted-foreground">
-                                                            <FolderKanban className="w-4 h-4 shrink-0" />
-                                                            <span className="font-semibold text-foreground bg-muted px-2 py-0.5 rounded uppercase tracking-wider text-xs">{entry.projectNumber}</span>
+                                                    {entry.allocations?.length > 0 && (
+                                                        <div className="flex flex-col gap-2 mb-2">
+                                                            {entry.allocations.map(alloc => (
+                                                                <div key={alloc.id} className="flex items-center gap-2 text-muted-foreground">
+                                                                    <FolderKanban className="w-4 h-4 shrink-0" />
+                                                                    <span className="font-semibold text-foreground bg-muted px-2 py-0.5 rounded uppercase tracking-wider text-xs">{alloc.projectNumber || 'Unassigned'}</span>
+                                                                    <span className="text-xs opacity-70">({alloc.hours}h)</span>
+                                                                </div>
+                                                            ))}
                                                         </div>
                                                     )}
                                                     {entry.description && (
@@ -196,6 +203,8 @@ export function EmployeesDashboard({ initialData, existingProjectNumbers }: Empl
                     )
                 })}
             </div>
+
+            <EmployeeAnalytics data={data} />
 
             <AddEmployeeWorkModal
                 isOpen={isAddModalOpen}

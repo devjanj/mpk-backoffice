@@ -11,16 +11,32 @@ export async function POST(req: Request) {
         const id = formData.get('id') as string | null
         const employeeName = formData.get('employeeName') as string
         const date = formData.get('date') as string
-        const rawHours = formData.get('hours') as string
         const rawPayRate = formData.get('payRate') as string
         const rawExtraCosts = formData.get('extraCosts') as string
-        const projectNumber = formData.get('projectNumber') as string
         const description = formData.get('description') as string
+
+        // Multi-Project Splits (Phase 13)
+        const rawAllocations = formData.get('allocations') as string
+        let allocations: { projectNumber: string, hours: number }[] = []
+        try {
+            if (rawAllocations) {
+                allocations = JSON.parse(rawAllocations)
+            }
+        } catch (e) {
+            console.error("Failed to parse allocations JSON", e)
+        }
+
+        // Mathematically derive total hours from the splits
+        const hours = allocations.reduce((sum, alloc) => sum + (alloc.hours || 0), 0)
+
+        // Construct Aggregate String for Google Sheets (e.g. "001_RU35 (5h), 010_SKSK (4h)")
+        const aggregatedProjectString = allocations.length > 0
+            ? allocations.map(a => `${a.projectNumber} (${a.hours}h)`).join(', ')
+            : '-'
 
         // Grab multiple files if they exist
         const files = formData.getAll('file') as File[]
 
-        const hours = parseEuropeanNumberHelper(rawHours) || 0
         const payRate = parseEuropeanNumberHelper(rawPayRate) || 0
         const extraCosts = parseEuropeanNumberHelper(rawExtraCosts) || 0
 
@@ -125,7 +141,7 @@ export async function POST(req: Request) {
 
                 const uploadedFile = await driveClient.files.create({
                     requestBody: {
-                        name: `EMP_${employeeName}_${date}_${projectNumber || 'NoProj'}_${file.name}`,
+                        name: `EMP_${employeeName}_${date}_${allocations[0]?.projectNumber || 'NoProj'}_${file.name}`,
                         parents: [uploadFolderId!],
                     },
                     media: {
@@ -174,6 +190,12 @@ export async function POST(req: Request) {
         // Branch: UPDATE or CREATE
         if (id) {
             console.log(`[Employee Work Save] Updating Postgres record for ID: ${id}`)
+
+            // First we must delete existing allocations for this record to cleanly rebuild them
+            await prisma.employeeWorkAllocation.deleteMany({
+                where: { employeeWorkId: id }
+            })
+
             const updatedRecord = await prisma.employeeWork.update({
                 where: { id },
                 data: {
@@ -182,10 +204,16 @@ export async function POST(req: Request) {
                     hours,
                     payRate,
                     extraCosts,
-                    projectNumber: projectNumber || null,
+                    projectNumber: aggregatedProjectString, // Legacy column string fallback
                     description: description || null,
                     driveFileId,
-                    driveFileLink
+                    driveFileLink,
+                    allocations: {
+                        create: allocations.map(a => ({
+                            projectNumber: a.projectNumber,
+                            hours: a.hours
+                        }))
+                    }
                 }
             })
 
@@ -197,7 +225,7 @@ export async function POST(req: Request) {
                     hours,
                     payRate,
                     extraCosts,
-                    projectNumber,
+                    projectNumber: aggregatedProjectString,
                     description,
                     driveFileLink: driveFileLink || null
                 })
@@ -215,10 +243,16 @@ export async function POST(req: Request) {
                     hours,
                     payRate,
                     extraCosts,
-                    projectNumber: projectNumber || null,
+                    projectNumber: aggregatedProjectString,
                     description: description || null,
                     driveFileId,
-                    driveFileLink
+                    driveFileLink,
+                    allocations: {
+                        create: allocations.map(a => ({
+                            projectNumber: a.projectNumber,
+                            hours: a.hours
+                        }))
+                    }
                 }
             })
 
@@ -230,7 +264,7 @@ export async function POST(req: Request) {
                     hours,
                     payRate,
                     extraCosts,
-                    projectNumber,
+                    projectNumber: aggregatedProjectString,
                     description,
                     driveFileLink: driveFileLink || null
                 })

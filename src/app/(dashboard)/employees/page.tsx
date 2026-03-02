@@ -8,7 +8,8 @@ export const dynamic = 'force-dynamic';
 export default async function EmployeesPage() {
     // 1. Fetch all tracking records from PostgreSQL
     const employeeWorkRecords = await prisma.employeeWork.findMany({
-        orderBy: { date: 'desc' }
+        orderBy: { date: 'desc' },
+        include: { allocations: true }
     })
 
     // 2. Fetch all valid project numbers to feed the project dropdown in the frontend modal

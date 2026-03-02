@@ -17,10 +17,9 @@ interface AddEmployeeWorkModalProps {
 export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, editData, onSuccess }: AddEmployeeWorkModalProps) {
     const [employeeName, setEmployeeName] = useState<'Žan' | 'Jan' | 'Marko'>('Žan')
     const [date, setDate] = useState<string>('')
-    const [hours, setHours] = useState<string>('')
+    const [allocations, setAllocations] = useState<{ id: string, projectNumber: string, hours: string }[]>([{ id: 'init', projectNumber: '', hours: '' }])
     const [payRate, setPayRate] = useState<string>('')
     const [extraCosts, setExtraCosts] = useState<string>('')
-    const [projectNum, setProjectNum] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
     const [files, setFiles] = useState<File[]>([])
@@ -40,10 +39,19 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                 const dd = String(d.getDate()).padStart(2, '0')
                 setDate(`${yyyy}-${mm}-${dd}`)
 
-                setHours(editData.hours.toString())
+                // Process phase 13 array allocations or fallback to legacy strings
+                if (editData.allocations && editData.allocations.length > 0) {
+                    setAllocations(editData.allocations.map(a => ({
+                        id: a.id,
+                        projectNumber: a.projectNumber,
+                        hours: a.hours.toString()
+                    })))
+                } else {
+                    setAllocations([{ id: 'legacy', projectNumber: editData.projectNumber || '', hours: editData.hours.toString() }])
+                }
+
                 setPayRate(editData.payRate.toString())
                 setExtraCosts(editData.extraCosts ? editData.extraCosts.toString() : '')
-                setProjectNum(editData.projectNumber || '')
                 setDescription(editData.description || '')
                 setFiles([])
             } else {
@@ -54,10 +62,9 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                 const dd = String(today.getDate()).padStart(2, '0')
                 setDate(`${yyyy}-${mm}-${dd}`)
 
-                setHours('')
+                setAllocations([{ id: Math.random().toString(), projectNumber: '', hours: '' }])
                 setPayRate('15')
                 setExtraCosts('')
-                setProjectNum('')
                 setDescription('')
                 setFiles([])
             }
@@ -82,8 +89,11 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
     }
 
     const handleSave = async () => {
-        if (!date || !hours || !payRate) {
-            alert('Please fill out Date, Hours, and Pay Rate.')
+        // Validation: Verify there is at least one valid hour numeric value
+        const hasValidHours = allocations.some(a => parseFloat(a.hours.replace(',', '.')) > 0)
+
+        if (!date || !hasValidHours || !payRate) {
+            alert('Please fill out Date, Pay Rate, and ensure at least one Project Allocation has valid Hours.')
             return
         }
 
@@ -99,10 +109,18 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
             }
             formData.append('employeeName', employeeName)
             formData.append('date', formattedDate)
-            formData.append('hours', hours) // Keep as string for backend parsing
+
+            // Cleanly serialize the array of allocations for the strict backend parser
+            const payloadAllocations = allocations
+                .filter(a => parseFloat(a.hours.replace(',', '.')) > 0)
+                .map(a => ({
+                    projectNumber: a.projectNumber.trim().toUpperCase() || 'NO_PROJ',
+                    hours: parseFloat(a.hours.replace(',', '.'))
+                }))
+
+            formData.append('allocations', JSON.stringify(payloadAllocations))
             formData.append('payRate', payRate) // Send as string to support commas
             formData.append('extraCosts', extraCosts || '0') // Send as string
-            formData.append('projectNumber', projectNum)
             formData.append('description', description)
             files.forEach(f => {
                 formData.append('file', f)
@@ -184,17 +202,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-3 gap-6 mb-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider flex items-center gap-1">Hours <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="text"
-                                            value={hours}
-                                            onChange={(e) => setHours(e.target.value)}
-                                            placeholder="e.g. 8.5 or 8,5"
-                                            className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50"
-                                        />
-                                    </div>
+                                <div className="grid grid-cols-2 gap-6 mb-6">
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider flex items-center gap-1">Pay Rate (€/h) <span className="text-red-500">*</span></label>
                                         <input
@@ -217,22 +225,77 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                                     </div>
                                 </div>
 
-                                <div className="space-y-2 mb-6">
-                                    <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">Project Number</label>
-                                    <div className="relative">
-                                        <input
-                                            type="text"
-                                            value={projectNum}
-                                            onChange={(e) => setProjectNum(e.target.value.toUpperCase())}
-                                            placeholder="e.g. 054_PRI, NoProj"
-                                            className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50 uppercase"
-                                            list="employee-projects"
-                                        />
-                                        <datalist id="employee-projects">
-                                            {existingProjectNumbers.map(p => <option key={p} value={p} />)}
-                                        </datalist>
+                                <div className="space-y-4 mb-6">
+                                    <div className="flex items-center justify-between border-b border-border/50 pb-2">
+                                        <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider flex items-center gap-1">Project Hours Split <span className="text-red-500">*</span></label>
+                                        <span className="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-lg">
+                                            Total: {allocations.reduce((sum, a) => sum + (parseFloat(a.hours.replace(',', '.')) || 0), 0)}h
+                                        </span>
                                     </div>
+
+                                    <div className="space-y-3">
+                                        <AnimatePresence>
+                                            {allocations.map((alloc, idx) => (
+                                                <motion.div
+                                                    key={alloc.id}
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="flex items-center gap-3 relative"
+                                                >
+                                                    <div className="flex-1 relative">
+                                                        <input
+                                                            type="text"
+                                                            value={alloc.projectNumber}
+                                                            onChange={(e) => {
+                                                                const newAllocs = [...allocations]
+                                                                newAllocs[idx].projectNumber = e.target.value.toUpperCase()
+                                                                setAllocations(newAllocs)
+                                                            }}
+                                                            placeholder="Project # (e.g. 054_PRI)"
+                                                            className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50 uppercase"
+                                                            list="employee-projects"
+                                                        />
+                                                    </div>
+                                                    <div className="w-1/3 relative">
+                                                        <input
+                                                            type="text"
+                                                            value={alloc.hours}
+                                                            onChange={(e) => {
+                                                                const newAllocs = [...allocations]
+                                                                newAllocs[idx].hours = e.target.value
+                                                                setAllocations(newAllocs)
+                                                            }}
+                                                            placeholder="Hours (e.g. 4.5)"
+                                                            className="w-full bg-background border border-border/50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50"
+                                                        />
+                                                    </div>
+                                                    {allocations.length > 1 && (
+                                                        <button
+                                                            onClick={() => setAllocations(prev => prev.filter(a => a.id !== alloc.id))}
+                                                            className="p-2.5 text-muted-foreground hover:bg-red-500/10 hover:text-red-500 rounded-xl transition-colors shrink-0"
+                                                        >
+                                                            <X className="w-5 h-5" />
+                                                        </button>
+                                                    )}
+                                                </motion.div>
+                                            ))}
+                                        </AnimatePresence>
+                                    </div>
+
+                                    <datalist id="employee-projects">
+                                        {existingProjectNumbers.map(p => <option key={p} value={p} />)}
+                                    </datalist>
+
+                                    <button
+                                        onClick={() => setAllocations(prev => [...prev, { id: Math.random().toString(), projectNumber: '', hours: '' }])}
+                                        className="w-full flex items-center justify-center py-2.5 border-2 border-dashed border-border hover:border-primary/50 hover:bg-muted/50 rounded-xl text-sm font-semibold text-muted-foreground hover:text-foreground transition-all"
+                                    >
+                                        + Split into another Project
+                                    </button>
                                 </div>
+
+
 
                                 <div className="space-y-2 mb-6">
                                     <label className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">Short Description</label>
