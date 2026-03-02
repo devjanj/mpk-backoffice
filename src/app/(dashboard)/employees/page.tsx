@@ -1,4 +1,3 @@
-import { Sidebar } from '@/components/Sidebar'
 import { Users } from 'lucide-react'
 import prisma from '@/lib/prisma'
 import { EmployeesDashboard } from '@/components/EmployeesDashboard'
@@ -19,9 +18,7 @@ export default async function EmployeesPage() {
     const existingProjectNumbers = projects.map(p => p.projectNumber)
 
     return (
-        <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
-            <Sidebar />
-
+        <>
             <main className="flex-1 p-4 md:p-8 overflow-y-auto">
                 <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                     <div>
@@ -38,6 +35,6 @@ export default async function EmployeesPage() {
                     existingProjectNumbers={existingProjectNumbers}
                 />
             </main>
-        </div>
+        </>
     )
 }
