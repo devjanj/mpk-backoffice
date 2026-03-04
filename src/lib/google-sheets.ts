@@ -533,12 +533,15 @@ export async function appendInvoiceToSheet(invoice: {
     const income = invoice.parsedAmount >= 0 ? invoice.parsedAmount : null
     const outcome = invoice.parsedAmount < 0 ? Math.abs(invoice.parsedAmount) : null
 
+    // The date column is crucial for identifying genuine inhabited rows since CF abandons column A often.
+    const primaryCol = invoice.source === 'CF' ? 3 : 1;
+
     // Find the true last row
     let trueBottom = sheet.rowCount
     for (let i = sheet.rowCount; i >= 1; i--) {
         const row = sheet.getRow(i)
-        const colA = String(row.getCell(1).value || '').trim()
-        if (colA !== '' && colA.length >= 3 && colA !== '-' && colA !== 'undefined') {
+        const cellVal = String(row.getCell(primaryCol).value || '').trim()
+        if (cellVal !== '' && cellVal.length >= 3 && cellVal !== '-' && cellVal !== 'undefined') {
             trueBottom = i
             break
         }
@@ -547,10 +550,11 @@ export async function appendInvoiceToSheet(invoice: {
     // Chronological Insertion Logic
     let insertIndexRow = trueBottom + 1
     const newDateVal = parseExcelDateToTimestamp(invoice.date)
+    const minDataRow = invoice.source === 'CF' ? 3 : 2 // Bank header is Row 1, CF header is Row 2
 
     if (newDateVal > 0) {
         let foundChronologicalSpot = false
-        for (let i = trueBottom; i >= 2; i--) { // skip header at 1
+        for (let i = trueBottom; i >= minDataRow; i--) {
             const row = sheet.getRow(i)
             // Main sheet Date is column A (1). CF sheet Date is column C (3).
             const dateCol = invoice.source === 'CF' ? 3 : 1
@@ -573,8 +577,8 @@ export async function appendInvoiceToSheet(invoice: {
                 }
             }
         }
-        if (!foundChronologicalSpot && trueBottom >= 2) {
-            insertIndexRow = 2
+        if (!foundChronologicalSpot && trueBottom >= minDataRow) {
+            insertIndexRow = minDataRow
         }
     }
 

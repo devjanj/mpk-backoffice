@@ -18,6 +18,7 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
 
     // Invoice Form Fields
     const [source, setSource] = useState<'BANK' | 'CF'>('BANK')
+    const [transactionType, setTransactionType] = useState<'OUTCOME' | 'INCOME'>('OUTCOME')
     const [date, setDate] = useState('')
     const [amount, setAmount] = useState('')
     const [tax, setTax] = useState('')
@@ -109,14 +110,16 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
     }
 
     const handleSave = async () => {
-        if (!file) return
-
+        // file is no longer strictly required
         setUploadProgress(10)
 
         try {
             const formData = new FormData()
-            formData.append('file', file)
+            if (file) {
+                formData.append('file', file)
+            }
             formData.append('source', source)
+            formData.append('transactionType', transactionType)
             formData.append('date', date)
             formData.append('projectNum', projectNum)
             formData.append('amount', amount)
@@ -233,33 +236,51 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
                     {/* Right Pane: AI Data Extraction */}
                     <div className="w-full md:w-[400px] flex flex-col p-6 overflow-y-auto">
 
-                        <div className="flex items-center justify-between mb-6">
-                            <h3 className="font-semibold text-lg flex items-center gap-2">
-                                Invoice Data
-                                {isProcessing && <Loader2 className="w-4 h-4 animate-spin text-primary" />}
-                                {scanComplete && <CheckCircle2 className="w-4 h-4 text-green-500" />}
-                            </h3>
+                        <div className="flex flex-col gap-3 mb-6">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-semibold text-lg flex items-center gap-2">
+                                    Transaction Data
+                                    {isProcessing && <Loader2 className="w-4 h-4 animate-spin text-primary" />}
+                                    {scanComplete && <CheckCircle2 className="w-4 h-4 text-green-500" />}
+                                </h3>
+                                {/* Source Toggle */}
+                                <div className="flex p-1 bg-muted rounded-xl">
+                                    <button
+                                        onClick={() => setSource('BANK')}
+                                        className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${source === 'BANK' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'
+                                            }`}
+                                    >
+                                        Bank (Main)
+                                    </button>
+                                    <button
+                                        onClick={() => setSource('CF')}
+                                        className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${source === 'CF' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'
+                                            }`}
+                                    >
+                                        CF (Cash)
+                                    </button>
+                                </div>
+                            </div>
 
-                            {/* Source Toggle */}
-                            <div className="flex p-1 bg-muted rounded-xl">
+                            <div className="flex p-1 bg-muted rounded-xl w-full">
                                 <button
-                                    onClick={() => setSource('BANK')}
-                                    className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${source === 'BANK' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'
+                                    onClick={() => setTransactionType('INCOME')}
+                                    className={`flex-1 py-1.5 rounded-lg text-sm font-medium transition-all ${transactionType === 'INCOME' ? 'bg-emerald-500/10 text-emerald-600 shadow-sm' : 'text-muted-foreground hover:text-foreground'
                                         }`}
                                 >
-                                    Bank (Main)
+                                    Income (+)
                                 </button>
                                 <button
-                                    onClick={() => setSource('CF')}
-                                    className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${source === 'CF' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'
+                                    onClick={() => setTransactionType('OUTCOME')}
+                                    className={`flex-1 py-1.5 rounded-lg text-sm font-medium transition-all ${transactionType === 'OUTCOME' ? 'bg-red-500/10 text-red-600 shadow-sm' : 'text-muted-foreground hover:text-foreground'
                                         }`}
                                 >
-                                    CF (Cash)
+                                    Outcome (-)
                                 </button>
                             </div>
                         </div>
 
-                        <div className={`space-y-4 transition-opacity duration-300 ${!file ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
+                        <div className="space-y-4">
 
                             {/* Project Number (Manual / Autocomplete) */}
                             <div className="relative">
@@ -380,7 +401,7 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
                         <div className="mt-auto pt-6">
                             <button
                                 onClick={handleSave}
-                                disabled={!file || isProcessing || uploadProgress > 0}
+                                disabled={isProcessing || uploadProgress > 0}
                                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl py-3 px-4 shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 relative overflow-hidden"
                             >
                                 {uploadProgress > 0 && (

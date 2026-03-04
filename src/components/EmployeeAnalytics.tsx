@@ -117,7 +117,7 @@ export function EmployeeAnalytics({ data }: EmployeeAnalyticsProps) {
                     <div className="w-full h-72">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={employeeMetrics} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
-                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9ca3af' }} />
                                 <Tooltip
                                     cursor={{ fill: 'hsl(var(--muted)/0.5)' }}
                                     contentStyle={{ borderRadius: '1rem', border: '1px solid hsl(var(--border))', backgroundColor: 'hsl(var(--background))' }}
@@ -144,7 +144,7 @@ export function EmployeeAnalytics({ data }: EmployeeAnalyticsProps) {
                                         cy="50%"
                                         innerRadius={60}
                                         outerRadius={90}
-                                        paddingAngle={3}
+                                        paddingAngle={0}
                                         dataKey="value"
                                         label={({ name, percent }: any) => `${name} (${((percent || 0) * 100).toFixed(0)}%)`}
                                         labelLine={false}

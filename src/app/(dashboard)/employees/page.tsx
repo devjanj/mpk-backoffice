@@ -1,5 +1,6 @@
 import { Users } from 'lucide-react'
 import prisma from '@/lib/prisma'
+import { syncFinanceSheet } from '@/lib/google-sheets'
 import { EmployeesDashboard } from '@/components/EmployeesDashboard'
 
 // Allow fresh dynamic building without aggressive Vercel caching
@@ -12,11 +13,35 @@ export default async function EmployeesPage() {
         include: { allocations: true }
     })
 
-    // 2. Fetch all valid project numbers to feed the project dropdown in the frontend modal
-    const projects = await prisma.projectStatus.findMany({
-        select: { projectNumber: true }
-    })
-    const existingProjectNumbers = projects.map(p => p.projectNumber)
+    // 2. Extensively fetch all valid project numbers across the system to feed the autocomplete dropdown
+    const [projectStatuses, invoices, splits, allocations, legacyWork, financeRes] = await Promise.all([
+        prisma.projectStatus.findMany({ select: { projectNumber: true } }),
+        prisma.invoice.findMany({ select: { projectNumber: true }, distinct: ['projectNumber'] }),
+        prisma.transactionSplit.findMany({ select: { projectNumber: true }, distinct: ['projectNumber'] }),
+        // @ts-ignore - NextJS TS Server cache might lag Native Prisma Generation
+        prisma.employeeWorkAllocation.findMany({ select: { projectNumber: true }, distinct: ['projectNumber'] }),
+        prisma.employeeWork.findMany({ select: { projectNumber: true }, distinct: ['projectNumber'] }),
+        syncFinanceSheet()
+    ])
+
+    const financeProjects = (financeRes?.success && financeRes.data)
+        ? financeRes.data.map((r: any) => r.projectNumber)
+        : []
+
+    const allProjects = new Set([
+        ...projectStatuses.map((p: any) => p.projectNumber),
+        ...invoices.map((i: any) => i.projectNumber),
+        ...splits.map((s: any) => s.projectNumber),
+        // @ts-ignore - Prisma Client typings cache might lag behind exact deployment models
+        ...allocations.map((a: any) => a.projectNumber),
+        ...legacyWork.map((w: any) => w.projectNumber),
+        ...financeProjects
+    ])
+
+    // Clean up empty, null, or placeholder entries
+    const existingProjectNumbers = Array.from(allProjects)
+        .filter(p => typeof p === 'string' && p.trim() !== '' && p !== 'Unassigned' && p !== '-' && p !== 'NO_PROJ')
+        .sort()
 
     return (
         <>

@@ -10,6 +10,7 @@ export async function POST(req: Request) {
         const formData = await req.formData()
         const file = formData.get('file') as File | null
         const source = formData.get('source') as string // 'BANK' or 'CF'
+        const transactionType = formData.get('transactionType') as string // 'INCOME' or 'OUTCOME'
         const date = formData.get('date') as string
         const projectNumber = formData.get('projectNum') as string
         const amount = formData.get('amount') as string
@@ -73,10 +74,10 @@ export async function POST(req: Request) {
             }
         }
 
-        // 2. Parse Numeric Values securely (force invoices as negative outcome)
+        // 2. Parse Numeric Values dynamically depending on Income vs Outcome
         // Uses European parsing since frontend or AI might send "1.442,13"
-        const rawAmount = parseEuropeanNumberHelper(amount)
-        const parsedAmount = -Math.abs(rawAmount || 0)
+        const rawAmount = parseEuropeanNumberHelper(amount) || 0
+        const parsedAmount = transactionType === 'INCOME' ? Math.abs(rawAmount) : -Math.abs(rawAmount)
 
         const parsedTax = parseEuropeanNumberHelper(tax) || 0
 
