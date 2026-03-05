@@ -629,6 +629,34 @@ export async function appendInvoiceToSheet(invoice: {
     // Splice perfectly preserves all surrounding formatting, colors, and relative formulas.
     sheet.spliceRows(insertIndexRow, 0, newRowData)
 
+    // Critical Fix: If we inserted in the middle chronologically, the formulas BELOW this new row are broken!
+    // ExcelJS shifts them down, so Row 51 still references Row 49 instead of the newly inserted Row 50.
+    // We must rebuild the mathematical chain from insertIndexRow down to the absolute bottom.
+    if (insertIndexRow <= trueBottom) {
+        // Because we just spliced, the length of the sheet increased by 1
+        const newTotalRows = trueBottom + 1;
+        for (let i = insertIndexRow + 1; i <= newTotalRows; i++) {
+            const thisRow = sheet.getRow(i);
+            const prevRowIndex = i - 1;
+
+            if (invoice.source === 'CF') {
+                // CF: G is row balance
+                // formulaObj: G(prev) + E(new) - F(new)
+                const prevExists = i > 3; // CF header is row 2
+                thisRow.getCell(7).value = prevExists
+                    ? { formula: `G${prevRowIndex}+E${i}-F${i}` }
+                    : { formula: `E${i}-F${i}` };
+            } else {
+                // Bank: F is row balance
+                // formulaObj: F(prev) + D(new) - E(new)
+                const prevExists = i > 2; // Bank header is row 1
+                thisRow.getCell(6).value = prevExists
+                    ? { formula: `F${prevRowIndex}+D${i}-E${i}` }
+                    : { formula: `D${i}-E${i}` };
+            }
+        }
+    }
+
     const newBuffer = await workbook.xlsx.writeBuffer()
 
     const stream = new Readable()
