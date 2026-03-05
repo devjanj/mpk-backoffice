@@ -15,22 +15,29 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const body = await req.json()
-        const { transactionHash, projectNumber, amount, note } = body
+        const { transactionHash, splits } = body
 
-        if (!transactionHash || !projectNumber || amount === undefined) {
-            return NextResponse.json({ error: "Missing required split fields" })
+        if (!transactionHash || !Array.isArray(splits)) {
+            return NextResponse.json({ error: "Missing required split fields or invalid format" })
         }
 
-        const newSplit = await prisma.transactionSplit.create({
-            data: {
-                transactionHash,
-                projectNumber,
-                amount: parseFloat(amount),
-                note
-            }
+        // Delete existing splits for this hash to allow clean overriding/cancelling
+        await prisma.transactionSplit.deleteMany({
+            where: { transactionHash }
         })
 
-        return NextResponse.json({ success: true, data: newSplit })
+        if (splits.length > 0) {
+            await prisma.transactionSplit.createMany({
+                data: splits.map((sp: any) => ({
+                    transactionHash,
+                    projectNumber: sp.projectNumber,
+                    amount: sp.amount,
+                    note: sp.note || ''
+                }))
+            })
+        }
+
+        return NextResponse.json({ success: true, message: "Splits successfully saved" })
     } catch (e: any) {
         return NextResponse.json({ error: e.message })
     }

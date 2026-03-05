@@ -85,16 +85,19 @@ export function TransactionSplitModal({
             // But since the API currently only does POST, we will just blindly append them for now. 
             // Better DB Sync logic required for production edits.
 
-            for (const sp of splits) {
-                if (!sp.projectNumber || !sp.amount) continue;
+            const validSplits = splits.filter(sp => sp.projectNumber && sp.amount).map(sp => ({
+                projectNumber: sp.projectNumber,
+                amount: parseFloat(sp.amount.replace(',', '.')),
+                note: sp.note
+            }))
 
+            if (validSplits.length > 0) {
                 await fetch('/api/transaction-splits', {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         transactionHash: transaction.id,
-                        projectNumber: sp.projectNumber,
-                        amount: sp.amount.replace(',', '.'), // Normalize comma decimals for DB
-                        note: sp.note
+                        splits: validSplits
                     })
                 })
             }
