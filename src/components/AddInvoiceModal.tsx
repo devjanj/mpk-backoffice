@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Plus, UploadCloud, FileText, Image as ImageIcon, X, Loader2, CheckCircle2 } from 'lucide-react'
 
 interface AddInvoiceModalProps {
@@ -26,9 +26,35 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
     const [shortDescription, setShortDescription] = useState('')
     const [projectNum, setProjectNum] = useState('')
     const [isProjectDropdownOpen, setIsProjectDropdownOpen] = useState(false)
+    const [globalProjects, setGlobalProjects] = useState<string[]>([])
 
-    // Filter project numbers
-    const filteredProjects = existingProjectNumbers
+    // Fetch comprehensive project list when modal opens
+    useEffect(() => {
+        if (isOpen && globalProjects.length === 0) {
+            fetch('/api/projects/list')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        setGlobalProjects(data.data)
+                    }
+                })
+                .catch(err => console.error("Failed to fetch global projects:", err))
+        }
+    }, [isOpen, globalProjects.length])
+
+    // Prevent background scrolling when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+        return () => { document.body.style.overflow = 'unset' }
+    }, [isOpen])
+
+    // Filter project numbers using both local props and global fetch
+    const rawProjectList = Array.from(new Set([...existingProjectNumbers, ...globalProjects]))
+    const filteredProjects = rawProjectList
         .filter(p => p && p.toLowerCase().includes(projectNum.toLowerCase()) && p !== projectNum)
         .slice(0, 5) // Show top 5 suggestions
 

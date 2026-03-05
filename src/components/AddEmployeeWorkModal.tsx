@@ -71,6 +71,16 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
         }
     }, [isOpen, editData])
 
+    // Prevent background scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+        return () => { document.body.style.overflow = 'unset' }
+    }, [isOpen])
+
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()
         setIsDragging(true)

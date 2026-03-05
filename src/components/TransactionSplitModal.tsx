@@ -58,6 +58,16 @@ export function TransactionSplitModal({
         }
     }, [isOpen, transaction, existingSplits, maxAmount])
 
+    // Prevent background scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+        return () => { document.body.style.overflow = 'unset' }
+    }, [isOpen])
+
     const handleAddSplit = () => {
         setSplits([...splits, { projectNumber: '', amount: Math.max(0, remaining).toString(), note: '' }])
     }
