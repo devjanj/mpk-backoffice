@@ -4,31 +4,37 @@ import { BalanceChart } from '@/components/BalanceChart'
 import { MetricCard } from '@/components/MetricCard'
 import { CombinedCurrentBalanceCard } from '@/components/CombinedCurrentBalanceCard'
 import { FolderKanban, TrendingUp, BarChart3 } from 'lucide-react'
-import { getFinanceDashboardMetrics } from '@/lib/google-sheets'
+import { getFinanceDashboardMetrics, getCFDashboardMetrics } from '@/lib/google-sheets'
 import Link from 'next/link'
 import { CFBackgroundFetcher } from '@/components/CFBackgroundFetcher'
 import { ActiveProjectsOverview } from '@/components/ActiveProjectsOverview'
 
 export default async function DashboardPage() {
   const session = await getSession()
-  const metrics = await getFinanceDashboardMetrics()
+  const [metrics, cfMetrics] = await Promise.all([
+    getFinanceDashboardMetrics(),
+    getCFDashboardMetrics()
+  ])
+
+  // Aggregate Bank + CF Income for the Owners Overview
+  const totalCurrentIncome = (metrics?.currentMonthIncome || 0) + (cfMetrics?.currentMonthIncome || 0)
+  const totalPreviousIncome = (metrics?.previousMonthIncome || 0) + (cfMetrics?.previousMonthIncome || 0)
+
+  let totalPercentageChange = 0
+  if (totalPreviousIncome > 0) {
+    totalPercentageChange = ((totalCurrentIncome - totalPreviousIncome) / totalPreviousIncome) * 100
+  } else if (totalCurrentIncome > 0) {
+    totalPercentageChange = 100
+  }
 
   // Format fallbacks
   const currentBalance = metrics?.currentBalance || "€ 0,00"
 
-  const incomeCurrentFormatted = metrics
-    ? `€ ${metrics.currentMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : "€ 0,00"
+  const incomeCurrentFormatted = `€ ${totalCurrentIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  const previousIncomeFormatted = `€ ${totalPreviousIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 
-  const previousIncomeFormatted = metrics
-    ? `€ ${metrics.previousMonthIncome.toLocaleString('sl-SI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : "€ 0,00"
-
-  const incomeChangeFormatted = metrics?.percentageChange
-    ? `${metrics.percentageChange > 0 ? '+' : ''}${metrics.percentageChange.toFixed(1)}%`
-    : "0%"
-
-  const isPositiveTrend = (metrics?.percentageChange || 0) >= 0;
+  const incomeChangeFormatted = `${totalPercentageChange > 0 ? '+' : ''}${totalPercentageChange.toFixed(1)}%`
+  const isPositiveTrend = totalPercentageChange >= 0;
 
   return (
     <>
