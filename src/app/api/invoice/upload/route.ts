@@ -4,6 +4,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
+export const maxDuration = 60; // Extend Vercel timeout limit to 60 seconds
+
 export async function POST(req: Request) {
     try {
         const formData = await req.formData()

@@ -5,6 +5,8 @@ import { syncFinanceSheet } from '@/lib/google-sheets'
 import { getLocalXMLTransactions, parseEuropeanNumberHelper, formatEuropeanNumberHelper } from '@/lib/xml-parser'
 import { NextResponse } from 'next/server'
 
+export const maxDuration = 60; // Extend Vercel timeout limit to 60 seconds
+
 export async function GET() {
     try {
         const filePath = path.join(process.cwd(), 'public', 'bankexport.xlsx')

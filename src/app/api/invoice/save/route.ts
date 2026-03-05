@@ -5,6 +5,8 @@ import { appendInvoiceToSheet } from '@/lib/google-sheets'
 import { Readable } from 'stream'
 import { parseEuropeanNumberHelper } from '@/lib/xml-parser'
 
+export const maxDuration = 60; // Extend Vercel timeout limit to 60 seconds
+
 export async function POST(req: Request) {
     try {
         const formData = await req.formData()
