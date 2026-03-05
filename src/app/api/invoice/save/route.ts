@@ -43,9 +43,29 @@ export async function POST(req: Request) {
 
             console.log(`[Invoice Save] Uploading ${file.name} to Google Drive folder: ${driveFolderId}`)
 
+            // Format YYYY_MM_DD from DD.MM.YYYY
+            let year = 'YYYY', month = 'MM', day = 'DD'
+            if (date) {
+                const parts = date.split('.')
+                if (parts.length === 3) {
+                    day = parts[0].padStart(2, '0')
+                    month = parts[1].padStart(2, '0')
+                    year = parts[2]
+                }
+            }
+
+            // Generate filename: 2026_02_18_JAF-MPK_BANK.pdf
+            const extensionMatch = file.name.match(/\.[^/.]+$/)
+            const extension = extensionMatch ? extensionMatch[0] : ''
+            const baseName = file.name.replace(/\.[^/.]+$/, '')
+
+            // Remove invalid drive characters just in case
+            const safeBaseName = baseName.replace(/[/\\?%*:|"<>]/g, '-')
+            const newFileName = `${year}_${month}_${day}_${safeBaseName}_${source}${extension}`
+
             const uploadedFile = await driveClient.files.create({
                 requestBody: {
-                    name: `MPK_${source}_${date}_${projectNumber || 'NoProj'}_${file.name}`,
+                    name: newFileName,
                     parents: [driveFolderId], // Put it in the main finance folder for now. User can organize later.
                 },
                 media: {
