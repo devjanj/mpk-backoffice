@@ -1,0 +1,1 @@
+{"exclude": ["droplet-setup.ts", "server.ts", "test-*.mjs", "scripts"]}
