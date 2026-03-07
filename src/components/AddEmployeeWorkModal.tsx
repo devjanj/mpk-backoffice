@@ -16,6 +16,8 @@ interface AddEmployeeWorkModalProps {
 }
 
 export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, editData, onSuccess }: AddEmployeeWorkModalProps) {
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
+
     const [employeeName, setEmployeeName] = useState<'Žan' | 'Jan' | 'Marko'>('Žan')
     const [date, setDate] = useState<string>('')
     const [allocations, setAllocations] = useState<{ id: string, projectNumber: string, hours: string }[]>([{ id: 'init', projectNumber: '', hours: '' }])
@@ -174,7 +176,7 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                 formData.append('file', f)
             })
 
-            const res = await fetch('/api/employees/work', {
+            const res = await fetch(`${API_BASE}/api/employees/work`, {
                 method: 'POST',
                 body: formData
             })

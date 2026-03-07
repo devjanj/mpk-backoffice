@@ -11,6 +11,8 @@ interface AddInvoiceModalProps {
 }
 
 export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }: AddInvoiceModalProps) {
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
+
     const [file, setFile] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
@@ -124,7 +126,7 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
             const formData = new FormData()
             formData.append('file', finalFile)
 
-            const res = await fetch('/api/invoice/upload', {
+            const res = await fetch(`${API_BASE}/api/invoice/upload`, {
                 method: 'POST',
                 body: formData
             })
@@ -181,7 +183,7 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
 
             setUploadProgress(50) // Simulating intermediate progress
 
-            const res = await fetch('/api/invoice/save', {
+            const res = await fetch(`${API_BASE}/api/invoice/save`, {
                 method: 'POST',
                 body: formData
             })
