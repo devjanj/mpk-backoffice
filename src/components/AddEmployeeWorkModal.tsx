@@ -126,10 +126,6 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
                 } catch (error) {
                     console.error("Compression bypassed, continuing with raw image:", error);
                 }
-            } else if (rawFile.size > 4.5 * 1024 * 1024) {
-                // PDFs cannot be compressed easily on the client-side. Warn the user before Vercel drops the TCP connection natively.
-                alert(`Warning: The file "${rawFile.name}" is natively larger than the Vercel 4.5MB Cloud Limit ${(rawFile.size / 1024 / 1024).toFixed(2)} MB. \n\nPlease compress this PDF using a tool like iLovePDF before uploading.`);
-                continue; // Skip appending this file
             }
 
             processedFiles.push(finalFile)
