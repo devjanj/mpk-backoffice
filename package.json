@@ -15,6 +15,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^5.22.0",
+    "browser-image-compression": "^2.0.2",
     "clsx": "^2.1.1",
     "dotenv": "^17.3.1",
     "exceljs": "^4.4.0",

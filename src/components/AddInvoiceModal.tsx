@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Plus, UploadCloud, FileText, Image as ImageIcon, X, Loader2, CheckCircle2 } from 'lucide-react'
+import imageCompression from 'browser-image-compression'
 
 interface AddInvoiceModalProps {
     isOpen: boolean
@@ -82,11 +83,36 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
         e.preventDefault()
     }
 
-    const processFile = async (file: File) => {
-        setFile(file)
+    const processFile = async (rawFile: File) => {
+        let finalFile = rawFile;
+
+        // Vercel Serverless has a strict 4.5MB payload limit. Natively compress heavy Camera photos before sending.
+        if (rawFile.type.startsWith('image/')) {
+            try {
+                const options = {
+                    maxSizeMB: 2, // Aim strictly below 4.5MB limit
+                    maxWidthOrHeight: 2500, // Retain high-res OCR quality while dropping size
+                    useWebWorker: true
+                };
+                console.log(`Original image: ${(rawFile.size / 1024 / 1024).toFixed(2)} MB`);
+                const compressedBlob = await imageCompression(rawFile, options);
+                console.log(`Compressed image: ${(compressedBlob.size / 1024 / 1024).toFixed(2)} MB`);
+                finalFile = new File([compressedBlob], rawFile.name, { type: compressedBlob.type });
+            } catch (error) {
+                console.error("Compression bypassed, continuing with raw image:", error);
+            }
+        } else if (rawFile.size > 4.5 * 1024 * 1024) {
+            // PDFs cannot be compressed easily on the client-side. Warn the user before Vercel drops the TCP connection natively.
+            alert(`Warning: This file is natively larger than the Vercel 4.5MB Cloud Limit ${(rawFile.size / 1024 / 1024).toFixed(2)} MB. \n\nPlease compress this PDF using a tool like iLovePDF before uploading.`);
+            setIsProcessing(false);
+            setScanComplete(false);
+            return;
+        }
+
+        setFile(finalFile)
 
         // Setup local preview for images and PDFs
-        const url = URL.createObjectURL(file)
+        const url = URL.createObjectURL(finalFile)
         setPreviewUrl(url)
 
         // Execute True AI Processing OCR
@@ -96,7 +122,7 @@ export function AddInvoiceModal({ isOpen, onClose, existingProjectNumbers = [] }
 
         try {
             const formData = new FormData()
-            formData.append('file', file)
+            formData.append('file', finalFile)
 
             const res = await fetch('/api/invoice/upload', {
                 method: 'POST',

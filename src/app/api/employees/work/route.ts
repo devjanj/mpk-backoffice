@@ -6,13 +6,6 @@ import { Readable } from 'stream'
 import { parseEuropeanNumberHelper } from '@/lib/xml-parser'
 
 export const maxDuration = 60; // Extend Vercel timeout limit to 60 seconds
-export const config = {
-    api: {
-        bodyParser: {
-            sizeLimit: '20mb',
-        },
-    },
-};
 
 export async function POST(req: Request) {
     try {

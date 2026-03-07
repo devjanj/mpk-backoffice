@@ -5,13 +5,6 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 export const maxDuration = 60; // Extend Vercel timeout limit to 60 seconds
-export const config = {
-    api: {
-        bodyParser: {
-            sizeLimit: '20mb',
-        },
-    },
-};
 
 export async function POST(req: Request) {
     try {

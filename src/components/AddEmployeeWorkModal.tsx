@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, UploadCloud, XCircle, Loader2, FileCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import imageCompression from 'browser-image-compression'
 import { EmployeeWork } from './EmployeesDashboard'
 
 interface AddEmployeeWorkModalProps {
@@ -90,12 +91,49 @@ export function AddEmployeeWorkModal({ isOpen, onClose, existingProjectNumbers, 
         setIsDragging(false)
     }
 
-    const handleDrop = (e: React.DragEvent) => {
+    const handleDrop = async (e: React.DragEvent) => {
         e.preventDefault()
         setIsDragging(false)
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            setFiles(prev => [...prev, ...Array.from(e.dataTransfer.files)])
+            await processIncomingFiles(Array.from(e.dataTransfer.files))
         }
+    }
+
+    const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            await processIncomingFiles(Array.from(e.target.files))
+        }
+    }
+
+    const processIncomingFiles = async (newFiles: File[]) => {
+        const processedFiles: File[] = []
+
+        for (const rawFile of newFiles) {
+            let finalFile = rawFile
+
+            // Vercel Serverless has a strict 4.5MB payload limit. Natively compress heavy Camera photos before sending.
+            if (rawFile.type.startsWith('image/')) {
+                try {
+                    const options = {
+                        maxSizeMB: 2, // Aim strictly below 4.5MB limit
+                        maxWidthOrHeight: 2500, // Retain high-res quality while dropping size
+                        useWebWorker: true
+                    };
+                    const compressedBlob = await imageCompression(rawFile, options);
+                    finalFile = new File([compressedBlob], rawFile.name, { type: compressedBlob.type });
+                } catch (error) {
+                    console.error("Compression bypassed, continuing with raw image:", error);
+                }
+            } else if (rawFile.size > 4.5 * 1024 * 1024) {
+                // PDFs cannot be compressed easily on the client-side. Warn the user before Vercel drops the TCP connection natively.
+                alert(`Warning: The file "${rawFile.name}" is natively larger than the Vercel 4.5MB Cloud Limit ${(rawFile.size / 1024 / 1024).toFixed(2)} MB. \n\nPlease compress this PDF using a tool like iLovePDF before uploading.`);
+                continue; // Skip appending this file
+            }
+
+            processedFiles.push(finalFile)
+        }
+
+        setFiles(prev => [...prev, ...processedFiles])
     }
 
     const handleSave = async () => {
